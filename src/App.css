@@ -1,0 +1,127 @@
+
+.portada{
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  font-size: 1.5em;
+}
+.logoAndTitulo{
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+.logoImg{
+  width: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #14d386;
+}
+.logoImg img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.tituloPortada {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #14d386;
+  width: 80%;
+  text-align: center;
+}
+
+
+
+
+.articleInputs{
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 10px;
+  height: 50%;
+}
+.inputsH2{
+  font-size: 1em;
+  border-bottom: 2px solid #14d386;
+  width: 50%;
+  text-align: center;
+}
+
+.divInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+.containerInput{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.inputH4{
+  font-size: .9em;
+  width: 70%;
+}
+.input {
+  width: 70%;
+  font-size: .7em;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #14d386;
+  background-color: transparent;
+}
+.input:hover{
+  background-color: #14d38722;
+}
+
+.containerIinkForgetPassword {
+  width: 70%;
+  text-align: right;
+  padding-top: 5px;
+}
+.linkForgetPassword {
+  text-decoration: none;
+  font-size: .7em;
+  color: #000;
+  transition: color 0.3s ease-in-out;
+}
+.linkForgetPassword:hover, .linkRegister:hover{
+  color: #14d386;
+}
+
+.botonIngresar{
+  width: 70%;
+  background-color: #23e899;
+  border: none;
+  outline: none;
+  padding: 5px;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+  font-size: .8em;
+  cursor: pointer;
+  transition: background-Color 0.3s ease-in-out;
+  border-bottom: 4px solid #1ac187;
+}
+.botonIngresar:hover {
+  background-color: #1ac187; 
+  border-bottom: 4px solid #23e899;
+}
+.botonIngresar:active {
+  background-color: #128f68; 
+  border-bottom: 4px solid #1ac187;
+}
+
+.containerLinkRegister {
+  text-align: center;
+  width: 70%;
+}
+.linkRegister {
+  text-decoration: none;
+  font-size: .7em;
+  color: #000;
+  transition: color 0.3s ease-in-out;
+}
