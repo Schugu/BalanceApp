@@ -1,11 +1,15 @@
-
+/* CONTENEDOR GENERAL */
 .portada{
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   place-items: center;
   font-size: 1.5em;
 }
+/* PRIMER CONTENEDOR*/
 .logoAndTitulo{
+  width: 100%;
   height: 50%;
   display: flex;
   flex-direction: column;
@@ -13,12 +17,12 @@
   gap: 20px;
   padding: 10px;
 }
-
 .logoImg {
-  max-width: 50%;
+  max-width: 75%;
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid #14d386;
+  
 }
 .logoImg img {
   width: 100%;
@@ -26,7 +30,6 @@
   object-fit: cover;
   object-position: center;
 }
-
 .tituloPortada {
   padding-bottom: 5px;
   border-bottom: 2px solid #14d386;
@@ -34,15 +37,14 @@
   text-align: center;
 }
 
-
-
-
+/* SEGUNDO CONTENDOR */
 .articleInputs{
   display: flex;
   flex-direction: column;
   place-items: center;
   gap: 10px;
   height: 50%;
+  width: 100%;
 }
 .inputsH2{
   font-size: 1em;
@@ -50,7 +52,6 @@
   width: 50%;
   text-align: center;
 }
-
 .divInputs {
   display: flex;
   flex-direction: column;
@@ -129,6 +130,14 @@
   transition: color 0.3s ease-in-out;
   cursor: pointer;
 }
+
+
+
+
+
+
+
+
 
 
 
