@@ -1,15 +1,49 @@
 import { useState } from "react"
 import { useAuth } from "../Auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { API_URL } from '../Auth/constants.js'
 
 export default function Login() {
-  const [userName, setUserName] = useState('');
+  const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
+  const [errorResponse, setErrorResponse] = useState('');
+  const goTo = useNavigate();
   const auth = useAuth();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
+      });
+
+      if (response.ok) {
+        console.log('Login successful!');
+        setErrorResponse('');
+        goTo('/');
+      } else {
+        console.log('Error! Algo salio mal.')
+        const json = await response.json();
+        setErrorResponse(json.body.error);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (auth.isAuthenticated) {
-    return <Navigate to='/dashboard'/>
-  } 
+    return <Navigate to='/dashboard' />
+  }
   return (
     <section className='portada'>
       <article className='logoAndTitulo'>
@@ -22,8 +56,9 @@ export default function Login() {
 
       <article className='articleInputs'>
         <h3 className='inputsH2'>Inicio de sesion</h3>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
 
-        <form className='divInputs'>
+        <form className='divInputs' onSubmit={handleSubmit}>
           <section className='containerInput'>
             <h4 className='inputH4'>Nombre de usuario</h4>
             <input
@@ -31,8 +66,8 @@ export default function Login() {
               id='user'
               className='input'
               placeholder='carpincho_eficiente@gmail.com'
-              value={userName}
-              onChange={(e)=> setUserName(e.target.value)}
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
             />
           </section>
 
@@ -44,7 +79,7 @@ export default function Login() {
               className='input'
               placeholder='*********'
               value={password}
-              onChange={(e)=> setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <article className='containerIinkForgetPassword'>
@@ -55,7 +90,7 @@ export default function Login() {
           <button type="submit" className='botonIngresar'>Acceder</button>
 
           <section className='containerLinkRegister'>
-            <a href="#" className='linkRegister'>Registrarse</a>
+            <a onClick={()=> goTo('/signup')} className='linkRegister'>Registrarse</a>
           </section>
         </form>
 

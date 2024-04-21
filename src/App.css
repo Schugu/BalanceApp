@@ -127,4 +127,15 @@
   font-size: .7em;
   color: #000;
   transition: color 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+
+
+.errorMessage {
+  background-color: #f0dadc;
+  color: #99515c;
+  width: 70%;
+  text-align: center;
+  padding: 5px;
 }

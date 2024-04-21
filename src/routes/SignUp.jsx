@@ -1,24 +1,52 @@
 import { useState } from "react";
 import { useAuth } from "../Auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { API_URL } from '../Auth/constants.js'
 
 export default function SignUp() {
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos del formulario
-    console.log("Formulario enviado:", { userName, email, password });
-  };
+  const [errorResponse, setErrorResponse] = useState('');
 
   const auth = useAuth();
+  const goTo = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username,
+          password
+        })
+      });
+
+      if (response.ok) {
+        console.log('EL usuario se creó correctamente!');
+        setErrorResponse('');
+        goTo('/');
+      } else {
+        console.log('Error! Algo salio mal.')
+        const json = await response.json();
+        setErrorResponse(json.body.error);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (auth.isAuthenticated) {
-    return <Navigate to='/dashboard'/>
-  } 
-  
+    return <Navigate to='/dashboard' />
+  }
+
 
   return (
     <section className='portada'>
@@ -31,6 +59,7 @@ export default function SignUp() {
 
       <article className='articleInputs'>
         <h3 className='inputsH2'>Crear una cuenta</h3>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
 
         <form className='divInputs' onSubmit={handleSubmit}>
           <section className='containerInput'>
@@ -40,8 +69,8 @@ export default function SignUp() {
               id='userName'
               className='input'
               placeholder='Carpincho Eficiente'
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </section>
 
@@ -85,7 +114,7 @@ export default function SignUp() {
 
           <section className='containerLinkRegister'>
             <span>¿Ya tienes una cuenta? </span>
-            <a href="#" className='linkRegister'>Iniciar sesión</a>
+            <a onClick={()=>goTo('/')} className='linkRegister'>Iniciar sesión</a>
           </section>
         </form>
 
