@@ -29,7 +29,14 @@ export default function Login() {
       if (response.ok) {
         console.log('Login successful!');
         setErrorResponse('');
-        goTo('/');
+        const json = (await response.json());
+        
+        if (json.body.accessToken && json.body.refreshToken) {
+          auth.saveUser(json);
+          goTo('/dashboard');
+        }
+
+        
       } else {
         console.log('Error! Algo salio mal.')
         const json = await response.json();
