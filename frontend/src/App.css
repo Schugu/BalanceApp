@@ -18,18 +18,20 @@
   padding: 10px;
 }
 .logoImg {
-  max-width: 75%;
+  width: 55vw; /* 15em*/
+  height: 55vw; /* 15em*/
+  max-width: 100%;
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid #14d386;
-  
 }
 .logoImg img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
 }
+
 .tituloPortada {
   padding-bottom: 5px;
   border-bottom: 2px solid #14d386;
@@ -120,12 +122,14 @@
 }
 
 .containerLinkRegister {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   text-align: center;
-  width: 70%;
+  /* width: 70%; */
 }
 .linkRegister {
   text-decoration: none;
-  font-size: .7em;
   color: #000;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
@@ -136,14 +140,9 @@
 
 
 
-
-
-
-
-
 .errorMessage {
-  background-color: #f0dadc;
-  color: #99515c;
+  background-color: #ffe4e4;
+  color: #c33535;
   width: 70%;
   text-align: center;
   padding: 5px;
