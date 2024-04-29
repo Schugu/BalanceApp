@@ -17,14 +17,16 @@ import { TOKEN_SECRET } from '../config.js';
 export const register = async (req, res) => {
   // Extraer datos relevantes
   const { email, password, username } = req.body;
-  console.log(req.body);
+  
   try {
-    // Buscar un usuario que coincida con el email y almacenarlo en uan const.
-    const userFound = await User.findOne({email});
+    // Buscar un usuario que coincida con el correo electrónico
+    const userFound = await User.findOne({ $or: [{ email }, { username }] });
 
-    // Si encuentra un usuario que coincide lanzar un mensaje de error (el correo ya existe).
-    if (userFound) return res.status(400).json(["The email is already in use"]);
-
+    // Si se encuentra un usuario con el mismo correo electrónico o nombre de usuario, devolver un mensaje de error personalizado
+    if (userFound) {
+      return res.status(400).json({ message: "Username or email is already in use" });
+    }
+    
     // Metodo de bcrypt que transforma un string en una serie de caracteres aleatorios. 
     // Esto va a encriptar la contraseña. El 10 indica cuantas veces se va a ejecutar el algoritmo. 
     const passwordHash = await bcrypt.hash(password, 10);
