@@ -1,10 +1,24 @@
-
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../context/AuthContext.jsx";
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
 
 export default function LoginPage() {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  };
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const { signIn, errors: signInErrors, isAuthenticated } = useAuth();
+
+  const navigate = useNavigate();
+
+
+  const onSubmit = handleSubmit(data => {
+    signIn(data);
+  });
+
+  useEffect(() => {
+    if (isAuthenticated) navigate('/dashboard');
+  }, [isAuthenticated]);
+
 
   return (
     <section className='portada'>
@@ -17,27 +31,47 @@ export default function LoginPage() {
       </article>
 
       <article className='articleInputs'>
+        {
+          signInErrors.map((error, i) => (
+            <div key={i} className="errorMessage">
+              {error}
+            </div>
+          ))
+        }
+
         <h3 className='inputsH2'>Inicio de sesion</h3>
 
-        <form className='divInputs' onSubmit={handleSubmit}>
+        <form className='divInputs' onSubmit={onSubmit}>
           <section className='containerInput'>
-            <h4 className='inputH4'>Nombre de usuario</h4>
+            <h4 className='inputH4'>Correo electrónico</h4>
             <input
-              type="text"
-              id='user'
+              type="email"
+              name='email'
+              {...register('email', { required: true })}
               className='input'
               placeholder='carpincho_eficiente@gmail.com'
             />
+            {
+              errors.email && (
+                <p className="errorMessage">Email is requiere</p>
+              )
+            }
           </section>
 
           <section className='containerInput'>
             <h4 className='inputH4'>Contraseña:</h4>
             <input
               type="password"
-              id='password'
+              name='password'
+              {...register('password', { required: true })}
               className='input'
               placeholder='*********'
             />
+            {
+              errors.password && (
+                <p className="errorMessage">Password is requiere</p>
+              )
+            }
 
             <article className='containerIinkForgetPassword'>
               <a href="#" className='linkForgetPassword'>Olvidaste tu contraseña?</a>

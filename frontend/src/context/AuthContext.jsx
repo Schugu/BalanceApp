@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }) => {
   const signIn = async (user) => {
     try {
       const res = await loginRequest(user);
-      console.log(res);
       setIsAuthenticated(true); // Indicar si el usuario esta autentificado o no
       setUser(res.data); // Guardar los datos del usuario
     } catch (error) {
