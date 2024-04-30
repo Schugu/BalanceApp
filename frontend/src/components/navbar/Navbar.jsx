@@ -16,15 +16,16 @@ function Navbar() {
           <>
             <li>
               ¡Bienvenido
-              <Link className="botonUser" to='/profile'>{user.username}!</Link>
+              <Link className="botonUser" to='/profile'>{user.username}</Link>
+              !
             </li>
             <li>
-              <Link to='/add-task' className="link">
+              <Link className="botonLink agregar" to='/add-task'>
                 Añadir gastos
               </Link>
             </li>
             <li>
-              <Link className="link" to='/' onClick={() => { logout() }}>
+              <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
                 Cerrar Sesión
               </Link>
             </li>
@@ -32,12 +33,12 @@ function Navbar() {
         ) : (
           <>
             <li>
-              <Link to='/login' className="botonLink">
+              <Link to='/login' className="botonLink signIn">
                 Iniciar sesión
               </Link>
             </li>
             <li>
-              <Link to='/register' className="botonLink">
+              <Link to='/register' className="botonLink register">
                 Registrarse
               </Link>
             </li>
