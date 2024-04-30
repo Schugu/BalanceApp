@@ -15,21 +15,31 @@
   gap: 20px; 
   list-style: none;
 }
+.lista li {
+  display: flex;
+  justify-content: center;
+}
 
 .titulo {
   font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
-}
-
-.link {
-  text-decoration: none;  
   color: white;
 }
-.botonUser {
+.titulo:hover{
+  color: chartreuse;
+}
+.link {
+  text-decoration: none;
+}
+
+.user {
   color: #FFA500;
   padding-left: 5px;
   text-decoration: none;  
+}
+.user:hover{
+  text-decoration: underline;
 }
 
 .botonLink {
@@ -51,11 +61,12 @@
 .register {
   background-color: #32CD32; 
 }
-
-
 .botonLink:hover {
   background-color: rgba(255, 255, 255, 0.2); 
 }
+
+
+
 
 @media (max-width: 350px) {
   .lista {

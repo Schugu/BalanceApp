@@ -16,7 +16,7 @@ function Navbar() {
           <>
             <li>
               ¡Bienvenido
-              <Link className="botonUser" to='/profile'>{user.username}</Link>
+              <Link className="user" to='/profile'>{user.username}</Link>
               !
             </li>
             <li>
