@@ -1,7 +1,17 @@
 
+
+
+import Navbar from "../components/navbar/Navbar.jsx";
+
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <>
+      <Navbar></Navbar>
+    
+    
+    
+
+    </>
   )
 }
 
