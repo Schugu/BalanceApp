@@ -147,3 +147,23 @@
   text-align: center;
   padding: 5px;
 }
+
+/* DASHBOARD */
+.dashboard {
+  background-color: #505f77;
+  color: #abccff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.movimientos {
+  background-color: #839cc3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
