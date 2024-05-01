@@ -10,18 +10,20 @@ function Dashboard() {
     getMovimientos();
   }, [])
 
-  if (movimientos.length === 0) return (<h1>No tasks</h1>);
-
   return (
     <>
       <Navbar></Navbar>
       <section className="dashboard">
         <h1>Movimientos</h1>
+
+        {
+        movimientos.length === 0 ? <h1>No tasks</h1> :
         <article className="movimientos">
             {movimientos.map(movimiento => (
               <MovimientoCard movimiento={movimiento} key={movimiento._id} />
             ))}
         </article>
+        } 
       </section>
     </>
   )

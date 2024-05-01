@@ -24,8 +24,7 @@ export function BalanceProvider({ children }) {
   const [movimientos, setMovimientos] = useState([]);
 
   const createMovimiento = async (movimiento) => {
-    const res = await createMovimientoRequest(movimiento);
-    console.log(res);
+    await createMovimientoRequest(movimiento);
   };
 
   const getMovimientos = async () => {
@@ -61,7 +60,6 @@ export function BalanceProvider({ children }) {
         // Crea un arreglo nuevo sin la tarea que acabamos de eliminar
         setMovimientos(movimientos.filter(task => task._id !== id));
       }
-
     } catch (error) {
       console.log(error);
     }

@@ -24,13 +24,10 @@ function MovimientosFormPage() {
 
 
   const onSubmit = handleSubmit((data) => {
-    console.log('data: ' + data);
-
     const dataValid = {
       ...data,
       balance: parseFloat(data.balance), // Convertir a número si es necesario
     };
-    console.log('dataValid: ' + dataValid);
     // Modo edición
     if (params.id) {
       updateMovimiento(params.id, dataValid);
