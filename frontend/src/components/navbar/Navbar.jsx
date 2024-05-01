@@ -20,7 +20,7 @@ function Navbar() {
               !
             </li>
             <li>
-              <Link className="botonLink agregar" to='/add-task'>
+              <Link className="botonLink agregar" to='/add-movimiento'>
                 Añadir gastos
               </Link>
             </li>

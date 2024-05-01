@@ -13,7 +13,7 @@ import cookieParser from 'cookie-parser';
 // Importar authRoutes
 import authRoutes from './routes/auth.routes.js';
 
-// Importar saldoCuenta.routes.js 
+// Importar sbalanceRoutes.routes.js 
 import balanceRoutes from './routes/balance.routes.js'
 
 // Importar el cors

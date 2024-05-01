@@ -5,17 +5,17 @@ import Balance from '../models/balance.model.js'
 export const createMovimiento = async (req, res) => {
   try {
     // Esperamos recibir estos tres datos del req.body;
-    const { title, description, saldo } = req.body;
+    const { title, description, balance } = req.body;
 
-    // Crear nuevo saldo
+    // Crear nuevo balance
     const newMovimiento = new Balance({
       title,
       description,
-      saldo,
+      balance,
       user: req.user.id
     })
 
-    // Guardar nueva saldo
+    // Guardar nueva balance
     const savedMovimiento = await newMovimiento.save();
     res.json(savedMovimiento);
   } catch (error) {
@@ -25,7 +25,7 @@ export const createMovimiento = async (req, res) => {
 
 export const getMovimientos = async (req, res) => {
   try {
-    // Buscar saldo del usuario que este autenticado
+    // Buscar balance del usuario que este autenticado
     const movimiento = await Balance.find({
       user: req.user.id
     }).populate('user'); // Para traer toda la información del user.

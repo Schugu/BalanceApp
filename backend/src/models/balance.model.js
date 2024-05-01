@@ -10,7 +10,7 @@ const movimientosSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  saldo: {
+  balance: {
     type: Number,
     require:true,
   },

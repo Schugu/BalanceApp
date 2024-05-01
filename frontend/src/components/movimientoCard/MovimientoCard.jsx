@@ -2,11 +2,6 @@ import { useBalance } from "../../context/BalanceContext.jsx";
 import { Link } from "react-router-dom";
 import "./Movimientos.css";
 
-// DAYJS
-// import dayjs from "dayjs";
-// import utc from "dayjs/plugin/utc";
-// dayjs.extend(utc);
-
 function MovimientoCard({ movimiento }) {
   const { deleteMovimiento } = useBalance();
 
@@ -21,7 +16,7 @@ function MovimientoCard({ movimiento }) {
           >Borrar</button>
 
           <Link
-            to={`/tasks/${movimiento._id}`}
+            to={`/balance/${movimiento._id}`}
             className="movimientoBoton mEditar"
           >Editar</Link>
         </div>

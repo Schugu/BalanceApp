@@ -167,3 +167,21 @@
   gap: 10px;
   width: 100%;
 }
+
+
+/* MovimientosFormPage */
+.movimientosFormPage-Container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.movimientosFormPage-Form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.movimientosFormPage-Form textarea {
+  resize: none;
+}

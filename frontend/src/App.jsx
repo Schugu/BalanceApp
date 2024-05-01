@@ -10,6 +10,8 @@ import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import MovimientosFormPage from "./pages/MovimientosFormPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 
 import ProtectedRoute from "./ProtectedRoute.jsx";
 
@@ -25,7 +27,10 @@ function App() {
             <Route path='/register' element={<RegisterPage />} />
 
             <Route element={<ProtectedRoute />}>
-              <Route path='/dashboard' element={<Dashboard></Dashboard>}></Route>
+              <Route path='/dashboard' element={<Dashboard></Dashboard>} />
+              <Route path='/add-Movimiento' element={<MovimientosFormPage />} />
+              <Route path='/balance/:id' element={<MovimientosFormPage />} />
+              <Route path='/profile' element={<ProfilePage />} />
             </Route>
           </Routes>
         </BrowserRouter>
