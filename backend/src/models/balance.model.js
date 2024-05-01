@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 // Datos que esperamos recibir de una task
-const taskSchema = new mongoose.Schema({
+const movimientosSchema = new mongoose.Schema({
   title: {
     type: String,
     require: true,
@@ -10,9 +10,9 @@ const taskSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  date: {
-    type: Date,
-    default: Date.now,
+  saldo: {
+    type: Number,
+    require:true,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,4 +23,4 @@ const taskSchema = new mongoose.Schema({
   timestamps: true
 });
 
-export default mongoose.model('Task', taskSchema);
+export default mongoose.model('movimientos', movimientosSchema);

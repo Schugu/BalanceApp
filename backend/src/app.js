@@ -13,8 +13,8 @@ import cookieParser from 'cookie-parser';
 // Importar authRoutes
 import authRoutes from './routes/auth.routes.js';
 
-// Importar task.routes.js 
-import taskRoutes from './routes/task.routes.js'
+// Importar saldoCuenta.routes.js 
+import balanceRoutes from './routes/balance.routes.js'
 
 // Importar el cors
 import cors from "cors";
@@ -41,8 +41,8 @@ app.use(cors({
 // Que app utilice el authRoutes
 app.use('/api', authRoutes);
 
-// Que app utilice el taskRoutes
-app.use('/api', taskRoutes);
+// Que app utilice el balanceRoutes
+app.use('/api', balanceRoutes);
 
 export default app 
 
