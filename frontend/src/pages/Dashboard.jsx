@@ -17,7 +17,7 @@ function Dashboard() {
         <h1>Movimientos</h1>
 
         {
-        movimientos.length === 0 ? <h1>No tasks</h1> :
+        movimientos.length === 0 ? <h6>No hay movimientos :/</h6> :
         <article className="movimientos">
             {movimientos.map(movimiento => (
               <MovimientoCard movimiento={movimiento} key={movimiento._id} />
