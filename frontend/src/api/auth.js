@@ -9,5 +9,6 @@ export const loginRequest = user =>  axios.post(`/login`, user);
 // Peticion get al backend
 export const verifyTokenRequest = () => axios.get('/verify'); 
 
-export const updateProfileRequest = (id, balance) => axios.put(`/balance/${id}`, balance);
+export const updateProfileRequest = (id, balance) => axios.put(`/profiles/${id}`, balance);
 
+export const getProfileRequest = () => axios.get(`/profile`);

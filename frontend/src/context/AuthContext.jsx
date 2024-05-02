@@ -2,7 +2,13 @@
 import { createContext, useState, useContext, useEffect } from "react";
 
 // Importar el auth.js
-import { registerRequest, loginRequest, verifyTokenRequest, updateProfileRequest } from "../api/auth.js";
+import {
+  registerRequest,
+  loginRequest,
+  verifyTokenRequest,
+  updateProfileRequest,
+  getProfileRequest
+} from "../api/auth.js";
 
 // Importar el js-cookie
 import Cookies from "js-cookie";
@@ -87,6 +93,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Get profile
+  const getProfile = async () => {
+    try {
+      const res = await getProfileRequest();
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
 
 
@@ -154,7 +170,8 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated,
       errors,
       loading,
-      updateProfile
+      updateProfile,
+      getProfile
     }}>
       {children}
     </AuthContext.Provider>
