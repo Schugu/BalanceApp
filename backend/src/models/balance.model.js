@@ -23,4 +23,4 @@ const movimientosSchema = new mongoose.Schema({
   timestamps: true
 });
 
-export default mongoose.model('movimientos', movimientosSchema);
+export default mongoose.model('Movimientos', movimientosSchema);

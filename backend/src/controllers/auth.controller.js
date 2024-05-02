@@ -151,3 +151,77 @@ export const verifyToken = async (req, res) => {
     })
   });
 }
+
+
+
+
+// Obtener perfiles
+export const getProfiles = async (req, res) => {
+  try {
+    // Utiliza el método find() de Mongoose para buscar todos los perfiles de usuarios
+    const profiles = await User.find();
+
+    // Devuelve los perfiles de usuarios como respuesta
+    res.json(profiles);
+  } catch (error) {
+    // Maneja cualquier error que ocurra durante la búsqueda de perfiles
+    res.status(500).json({ message: 'Error fetching profiles' });
+  }
+}
+
+// Obtener perfil por id
+export const getProfileById = async (req, res) => {
+  try {
+    // Utiliza el método findById() de Mongoose para buscar un perfil de usuario por su ID
+    const profile = await User.findById(req.params.id);
+
+    // Si no se encuentra ningún perfil con ese ID, devuelve un mensaje de error
+    if (!profile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    // Si se encuentra el perfil, devuélvelo como respuesta
+    res.json(profile);
+  } catch (error) {
+    // Maneja cualquier error que ocurra durante la búsqueda del perfil por ID
+    res.status(500).json({ message: 'Error fetching profile' });
+  }
+}
+
+// Editar user por id
+export const updateProfileById = async (req, res) => {
+  try {
+    // El params significa el dato de la URL que nos esten pasando
+    // Buscar una tarea por el id y actualizarla.
+    const userFound = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true // Esto significa que nos debe dar el dato actualizado y no el anterior. 
+    });
+
+    // Si no encontró ninguna tarea devolver un mensaje de error 
+    if (!userFound) return res.status(404).json({ message: 'User not found.' });
+
+    // Si se encontro y se actualizó la tarea, devolverla.
+    res.json(userFound);
+  } catch (error) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+}
+
+// Eliminar user por id
+export const deleteProfileById = async (req, res) => {
+  try {
+    // Utiliza el método findByIdAndDelete() de Mongoose para buscar y eliminar un perfil de usuario por su ID
+    const deletedProfile = await User.findByIdAndDelete(req.params.id);
+
+    // Si no se encuentra ningún perfil con ese ID, devuelve un mensaje de error
+    if (!deletedProfile) {
+      return res.status(404).json({ message: 'Profile not found' });
+    }
+
+    // Si se elimina correctamente, devuelve el perfil eliminado como respuesta
+    res.json({ message: 'Profile deleted successfully', deletedProfile });
+  } catch (error) {
+    // Maneja cualquier error que ocurra durante la eliminación del perfil por ID
+    res.status(500).json({ message: 'Error deleting profile' });
+  }
+}

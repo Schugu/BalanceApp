@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
     trim: true
+  },
+  saldo: {
+    type: Number,
+    trim: true
+  },
+  ingresoTotal: {
+    type: Number,
+    trim: true
+  },
+  egresoTotal: {
+    type: Number,
+    trim: true
   }
 }, {
   timestamps: true

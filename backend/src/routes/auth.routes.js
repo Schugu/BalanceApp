@@ -2,7 +2,17 @@
 import { Router } from "express";
 
 // Importar las funciones de auth.controller.js.
-import { register, login, logout, profile, verifyToken } from '../controllers/auth.controller.js';
+import {
+  register,
+  login,
+  logout,
+  profile,
+  verifyToken,
+  getProfiles,
+  getProfileById,
+  updateProfileById,
+  deleteProfileById
+} from '../controllers/auth.controller.js';
 
 // Importar el authRequiere de validateToken.js
 import { authRequire } from "../middlewares/validateToken.js";
@@ -24,9 +34,27 @@ router.post('/login', validateSchema(loginSchema), login);
 
 router.post('/logout', logout);
 
-router.get('/verify',  verifyToken);
+router.get('/verify', verifyToken);
 
 router.get('/profile', authRequire, profile);
+
+// Funciones para profile 
+
+// Obtener perfiles
+router.get('/profiles', authRequire, getProfiles);
+
+// Obtener un perfil por id
+router.get('/profiles/:id', authRequire, getProfileById);
+
+// Actualizar un perfil por id
+router.put('/profiles/:id', authRequire, updateProfileById);
+
+// Eliminar un perfil por id
+router.delete('/profiles/:id', authRequire, deleteProfileById);
+
+
+
+
 
 
 export default router;
