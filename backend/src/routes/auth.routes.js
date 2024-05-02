@@ -21,7 +21,7 @@ import { authRequire } from "../middlewares/validateToken.js";
 import { validateSchema } from '../middlewares/validator.middleware.js'
 
 // Importar el auth.schema
-import { registerSchema, loginSchema } from '../schemas/auth.schema.js'
+import { registerSchema, loginSchema, balanceSchema } from '../schemas/auth.schema.js'
 
 // Guardar objeto dado por Router en una const
 const router = Router();
@@ -47,7 +47,7 @@ router.get('/profiles', authRequire, getProfiles);
 router.get('/profiles/:id', authRequire, getProfileById);
 
 // Actualizar un perfil por id
-router.put('/profiles/:id', authRequire, updateProfileById);
+router.put('/profiles/:id', authRequire, validateSchema(balanceSchema), updateProfileById);
 
 // Eliminar un perfil por id
 router.delete('/profiles/:id', authRequire, deleteProfileById);
