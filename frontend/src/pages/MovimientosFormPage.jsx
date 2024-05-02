@@ -3,10 +3,12 @@ import { useBalance } from "../context/BalanceContext.jsx";
 // El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function MovimientosFormPage() {
-  const { register, handleSubmit, setValue } = useForm();
-  const { createMovimiento, getMovimiento, updateMovimiento } = useBalance();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
+  const { updateProfile, errors: profileErrors } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -28,6 +30,7 @@ function MovimientosFormPage() {
       ...data,
       balance: parseFloat(data.balance), // Convertir a número si es necesario
     };
+    
     // Modo edición
     if (params.id) {
       updateMovimiento(params.id, dataValid);
@@ -40,29 +43,54 @@ function MovimientosFormPage() {
 
   return (
     <div className="movimientosFormPage-Container">
+      {
+        movimientosError.map((error, i) => (
+          <div key={i} className="errorMessage">
+            {error}
+          </div>
+        ))
+      }
       <form onSubmit={onSubmit} className="movimientosFormPage-Form">
         <label htmlFor="title">Titulo</label>
         <input
           type="text"
+          name="title"
           placeholder="Title"
-          {...register('title')}
+          {...register('title', { required: true })}
           autoFocus
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
+        {
+          errors.title && (
+            <p className="errorMessage">Titulo is requiere</p>
+          )
+        }
 
         <label htmlFor="description">Descripción</label>
         <textarea
           rows="3"
           placeholder="Description"
-          {...register('description')}
+          name="description"
+          {...register('description', { required: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         ></textarea>
+        {
+          errors.description && (
+            <p className="errorMessage">Description is requiere</p>
+          )
+        }
 
         <label htmlFor="number">Balance</label>
         <input type="number"
-          {...register('balance')}
+          name="balance"
+          {...register('balance', { required: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />
+        {
+          errors.balance && (
+            <p className="errorMessage">Balance is requiere</p>
+          )
+        }
 
         <button className="bg-indigo-500 px-3 py-2 rounded-md">Guardar</button>
       </form>

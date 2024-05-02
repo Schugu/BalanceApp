@@ -23,8 +23,19 @@ export const useBalance = () => {
 export function BalanceProvider({ children }) {
   const [movimientos, setMovimientos] = useState([]);
 
+  const [errors, setErrors] = useState([]);
+
   const createMovimiento = async (movimiento) => {
-    await createMovimientoRequest(movimiento);
+    try {
+      await createMovimientoRequest(movimiento);
+    } catch (error) {
+      // Si es un array devolverlo solamente
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      // Sino devolverlo como un array
+      setErrors([error.response.data.message]);
+    }
   };
 
   const getMovimientos = async () => {
@@ -49,7 +60,12 @@ export function BalanceProvider({ children }) {
     try {
       await updateMovimientoRequest(id, movimiento);
     } catch (error) {
-      console.log(error);
+      // Si es un array devolverlo solamente
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      // Sino devolverlo como un array
+      setErrors([error.response.data.message]);
     }
   };
 
@@ -72,7 +88,8 @@ export function BalanceProvider({ children }) {
       getMovimientos,
       getMovimiento,
       updateMovimiento,
-      deleteMovimiento
+      deleteMovimiento,
+      errors
     }}>
       {children}
     </BalanceContext.Provider>

@@ -2,7 +2,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 
 // Importar el auth.js
-import { registerRequest, loginRequest, verifyTokenRequest } from "../api/auth.js";
+import { registerRequest, loginRequest, verifyTokenRequest, updateProfileRequest } from "../api/auth.js";
 
 // Importar el js-cookie
 import Cookies from "js-cookie";
@@ -73,6 +73,26 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   }
 
+  // Editar profile
+  const updateProfile = async (id, balance) => {
+    try {
+      await updateProfileRequest(id, balance);
+    } catch (error) {
+      // Si es un array devolverlo solamente
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      // Sino devolverlo como un array
+      setErrors([error.response.data.message]);
+    }
+  };
+
+
+
+
+
+
+
   // Funcion para eliminar los mensajes de error despues de un tiempo.
   useEffect(() => {
     if (errors.length > 0) {
@@ -126,7 +146,16 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, logout, user, isAuthenticated, errors, loading }}>
+    <AuthContext.Provider value={{
+      signUp,
+      signIn,
+      logout,
+      user,
+      isAuthenticated,
+      errors,
+      loading,
+      updateProfile
+    }}>
       {children}
     </AuthContext.Provider>
   )
