@@ -2,27 +2,26 @@ import { useForm } from "react-hook-form";
 import { useBalance } from "../context/BalanceContext.jsx";
 // El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 
 function MovimientosFormPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
-  const { user, setUser, updateProfile } = useAuth();
+  const { user, setUser, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
+  const [valorMovimiento, setValorMovimiento] = useState(0);
 
   useEffect(() => {
+    getProfile();
     async function loadMovimiento() {
       if (params.id) {
         const movimiento = await getMovimiento(params.id);
         setValue('title', movimiento.title);
         setValue('description', movimiento.description);
         setValue('balance', movimiento.balance);
-        const newBalance = user.saldo - movimiento.balance;
-        const updatedUser = { ...user, saldo: newBalance };
-        setUser(updatedUser);
-        updateProfile(user.id, { saldo: newBalance });
+        setValorMovimiento(movimiento.balance);
       }
     }
     loadMovimiento();
@@ -38,7 +37,7 @@ function MovimientosFormPage() {
     // Modo edición
     if (params.id) {
       updateMovimiento(params.id, dataValid);
-      const newBalance = user.saldo - dataValid.balance;
+      const newBalance = (user.saldo + valorMovimiento) - dataValid.balance ;
       const updatedUser = { ...user, saldo: newBalance };
       setUser(updatedUser);
       updateProfile(user.id, { saldo: newBalance });
