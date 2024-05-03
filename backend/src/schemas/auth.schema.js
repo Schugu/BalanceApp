@@ -25,11 +25,5 @@ export const loginSchema = z.object({
 export const balanceSchema = z.object({
     saldo: z.number()
         .min(0, { message: 'Saldo must be a non-negative number' })
-        .positive({ message: 'Saldo must be a positive number' }),
-    ingresoTotal: z.number()
-        .min(0, { message: 'Ingreso total must be a non-negative number' })
-        .positive({ message: 'Ingreso total must be a positive number' }),
-    egresoTotal: z.number()
-        .min(0, { message: 'Egreso total must be a non-negative number' })
-        .positive({ message: 'Egreso total must be a positive number' }),
+        .positive({ message: 'Saldo must be a positive number' })
 });

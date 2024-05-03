@@ -22,17 +22,7 @@ const userSchema = new mongoose.Schema({
   saldo: {
     type: Number,
     min: 0, 
-    required: true 
-  },
-  ingresoTotal: {
-    type: Number,
-    min: 0, 
-    required: true 
-  },
-  egresoTotal: {
-    type: Number,
-    min: 0, 
-    required: true 
+    require: true,
   }
 }, {
   timestamps: true

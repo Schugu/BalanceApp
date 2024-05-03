@@ -97,7 +97,7 @@ export const AuthProvider = ({ children }) => {
   const getProfile = async () => {
     try {
       const res = await getProfileRequest();
-      return res.data;
+      setUser(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -171,7 +171,8 @@ export const AuthProvider = ({ children }) => {
       errors,
       loading,
       updateProfile,
-      getProfile
+      getProfile,
+      setUser
     }}>
       {children}
     </AuthContext.Provider>

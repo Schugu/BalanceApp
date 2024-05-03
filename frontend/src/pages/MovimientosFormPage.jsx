@@ -8,7 +8,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 function MovimientosFormPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
-  const { updateProfile, errors: profileErrors, getProfile } = useAuth();
+  const { user, setUser, updateProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
 
@@ -30,18 +30,24 @@ function MovimientosFormPage() {
       ...data,
       balance: parseFloat(data.balance), // Convertir a número si es necesario
     };
-    async function getDataUser () {
-      const res =  await getProfile();
-      console.log(res);
-    }
-    getDataUser();
+    
     // Modo edición
     if (params.id) {
       updateMovimiento(params.id, dataValid);
+      const newBalance = user.saldo + dataValid.balance;
+      const updatedUser = { ...user, saldo: newBalance };
+      setUser(updatedUser);
+      updateProfile(user.id, { saldo: newBalance });
     } else {
       // Modo creación
       createMovimiento(dataValid);
+      const newBalance = user.saldo + dataValid.balance;
+      const updatedUser = { ...user, saldo: newBalance };
+      setUser(updatedUser);
+      updateProfile(user.id, { saldo: newBalance });
     }
+    
+    console.log(user);
     navigate('/dashboard');
   });
 
