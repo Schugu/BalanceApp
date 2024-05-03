@@ -19,6 +19,10 @@ function MovimientosFormPage() {
         setValue('title', movimiento.title);
         setValue('description', movimiento.description);
         setValue('balance', movimiento.balance);
+        const newBalance = user.saldo - movimiento.balance;
+        const updatedUser = { ...user, saldo: newBalance };
+        setUser(updatedUser);
+        updateProfile(user.id, { saldo: newBalance });
       }
     }
     loadMovimiento();
@@ -28,26 +32,25 @@ function MovimientosFormPage() {
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
-      balance: parseFloat(data.balance), // Convertir a número si es necesario
+      balance: Math.abs(parseFloat(data.balance)), // Convertir a número si es necesario
     };
-    
+
     // Modo edición
     if (params.id) {
       updateMovimiento(params.id, dataValid);
-      const newBalance = user.saldo + dataValid.balance;
+      const newBalance = user.saldo - dataValid.balance;
       const updatedUser = { ...user, saldo: newBalance };
       setUser(updatedUser);
       updateProfile(user.id, { saldo: newBalance });
     } else {
       // Modo creación
       createMovimiento(dataValid);
-      const newBalance = user.saldo + dataValid.balance;
+      const newBalance = user.saldo - dataValid.balance;
       const updatedUser = { ...user, saldo: newBalance };
       setUser(updatedUser);
       updateProfile(user.id, { saldo: newBalance });
     }
-    
-    console.log(user);
+
     navigate('/dashboard');
   });
 

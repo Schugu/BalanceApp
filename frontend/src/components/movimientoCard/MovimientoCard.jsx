@@ -1,9 +1,19 @@
 import { useBalance } from "../../context/BalanceContext.jsx";
 import { Link } from "react-router-dom";
 import "./Movimientos.css";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 function MovimientoCard({ movimiento }) {
   const { deleteMovimiento } = useBalance();
+  const { user, setUser, updateProfile } = useAuth();
+
+  const borrarElemento = async () => {
+    const newBalance = user.saldo + movimiento.balance;
+    const updatedUser = { ...user, saldo: newBalance };
+    setUser(updatedUser);
+    await updateProfile(user.id, { saldo: newBalance });
+    deleteMovimiento(movimiento._id);
+  }
 
   return (
     <div className="movimiento">
@@ -11,13 +21,13 @@ function MovimientoCard({ movimiento }) {
         <h1 className="movimientoTitulo">{movimiento.title}</h1>
         <div className="movimientoBotones">
           <button
-            onClick={() => { deleteMovimiento(movimiento._id) }}
+            onClick={borrarElemento}
             className="movimientoBoton mBorrar"
           >Borrar</button>
 
           <Link
-            to={`/balance/${movimiento._id}`}
             className="movimientoBoton mEditar"
+            to={`/balance/${movimiento._id}`}
           >Editar</Link>
         </div>
       </header>
