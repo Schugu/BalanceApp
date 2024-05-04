@@ -14,8 +14,8 @@ function MovimientosFormPage() {
   const [valorMovimiento, setValorMovimiento] = useState(0);
 
   useEffect(() => {
-    getProfile();
     async function loadMovimiento() {
+      getProfile();
       if (params.id) {
         const movimiento = await getMovimiento(params.id);
         setValue('title', movimiento.title);
@@ -27,30 +27,34 @@ function MovimientosFormPage() {
     loadMovimiento();
   }, []);
 
-
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
-      balance: Math.abs(parseFloat(data.balance)), // Convertir a número si es necesario
+      balance: Math.abs(parseFloat(data.balance)),
     };
 
     // Modo edición
     if (params.id) {
-      updateMovimiento(params.id, dataValid);
-      const newBalance = (user.saldo + valorMovimiento) - dataValid.balance ;
-      const updatedUser = { ...user, saldo: newBalance };
-      setUser(updatedUser);
-      updateProfile(user.id, { saldo: newBalance });
+      const saldoOriginal = user.saldo + valorMovimiento;
+      if (dataValid.balance > saldoOriginal) {
+        alert('Saldo insuficiente');
+      } else {
+        const newBalance = saldoOriginal - dataValid.balance;
+        updateProfile(user.id, { saldo: newBalance });
+        updateMovimiento(params.id, dataValid);
+        navigate('/dashboard');
+      }
     } else {
       // Modo creación
-      createMovimiento(dataValid);
-      const newBalance = user.saldo - dataValid.balance;
-      const updatedUser = { ...user, saldo: newBalance };
-      setUser(updatedUser);
-      updateProfile(user.id, { saldo: newBalance });
+      if (dataValid.balance > user.saldo) {
+        alert('Saldo insuficiente');
+      } else {
+        const newBalance = user.saldo - dataValid.balance;
+        updateProfile(user.id, { saldo: newBalance });
+        createMovimiento(dataValid);
+        navigate('/dashboard');
+      }
     }
-
-    navigate('/dashboard');
   });
 
   return (
@@ -63,6 +67,7 @@ function MovimientosFormPage() {
         ))
       }
       <form onSubmit={onSubmit} className="movimientosFormPage-Form">
+        <h2>{`Saldo: ${user.saldo} || Valor del movimiento:`}</h2>
         <label htmlFor="title">Titulo</label>
         <input
           type="text"
