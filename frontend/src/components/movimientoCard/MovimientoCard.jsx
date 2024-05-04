@@ -5,14 +5,15 @@ import { useAuth } from "../../context/AuthContext.jsx";
 
 function MovimientoCard({ movimiento }) {
   const { deleteMovimiento } = useBalance();
-  const { user, setUser, updateProfile } = useAuth();
+  const { user, getProfile, updateProfile } = useAuth();
 
   const borrarElemento = async () => {
-    const newBalance = user.saldo + movimiento.balance;
-    const updatedUser = { ...user, saldo: newBalance };
-    setUser(updatedUser);
-    await updateProfile(user.id, { saldo: newBalance });
+    if (movimiento.title === 'Gasto') {
+      const newBalance = user.saldo + movimiento.balance;
+      await updateProfile(user.id, { saldo: newBalance });
+    } 
     deleteMovimiento(movimiento._id);
+    getProfile();
   }
 
   return (
