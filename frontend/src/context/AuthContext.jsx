@@ -99,15 +99,14 @@ export const AuthProvider = ({ children }) => {
       const res = await getProfileRequest();
       setUser(res.data);
     } catch (error) {
-      console.log(error);
+      // Si es un array devolverlo solamente
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      // Sino devolverlo como un array
+      setErrors([error.response.data.message]);
     }
   };
-
-
-
-
-
-
 
   // Funcion para eliminar los mensajes de error despues de un tiempo.
   useEffect(() => {

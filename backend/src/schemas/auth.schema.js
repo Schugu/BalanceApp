@@ -23,7 +23,8 @@ export const loginSchema = z.object({
 });
 
 export const balanceSchema = z.object({
-    saldo: z.number()
-        .int()
+    saldo: z
+        .number({ message: 'Saldo must be a number' })
         .min(0, { message: 'Saldo must be a non-negative number' })
+        .positive({ message: 'Saldo must be a positive number' })
 });

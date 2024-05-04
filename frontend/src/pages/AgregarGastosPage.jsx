@@ -7,11 +7,12 @@ import { useAuth } from "../context/AuthContext.jsx";
 
 function MovimientosFormPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-  const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
+  const { createMovimiento, getMovimiento, updateMovimiento } = useBalance();
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
   const [valorMovimiento, setValorMovimiento] = useState(0);
+  const [errores, setErrores] = useState([]);
 
   useEffect(() => {
     async function loadMovimiento() {
@@ -27,6 +28,15 @@ function MovimientosFormPage() {
     loadMovimiento();
   }, []);
 
+  useEffect(() => {
+    if (errores.length > 0) {
+      const timer = setTimeout(() => {
+        setErrores([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errores]);
+
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
@@ -38,7 +48,7 @@ function MovimientosFormPage() {
     if (params.id) {
       const saldoOriginal = user.saldo + valorMovimiento;
       if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
-        alert('Saldo insuficiente');
+        setErrores(['Saldo insuficiente']);
       } else {
         const newBalance = saldoOriginal - dataValid.balance;
         updateProfile(user.id, { saldo: newBalance });
@@ -48,20 +58,20 @@ function MovimientosFormPage() {
     } else {
       // Modo creación
       if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
-        alert('Saldo insuficiente');
+        setErrores(['Saldo insuficiente']);
       } else {
         const newBalance = user.saldo - dataValid.balance;
         updateProfile(user.id, { saldo: newBalance });
         createMovimiento(dataValid);
         navigate('/dashboard');
       }
-    } 
+    }
   });
 
   return (
     <div className="movimientosFormPage-Container">
       {
-        movimientosError.map((error, i) => (
+        errores.map((error, i) => (
           <div key={i} className="errorMessage">
             {error}
           </div>

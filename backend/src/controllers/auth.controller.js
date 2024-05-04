@@ -196,10 +196,11 @@ export const getProfileById = async (req, res) => {
 export const updateProfileById = async (req, res) => {
   try {
     // El params significa el dato de la URL que nos esten pasando
-    // Buscar una tarea por el id y actualizarla.
+    // Buscar un perfil por el id y actualizarlo.
     const userFound = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true // Esto significa que nos debe dar el dato actualizado y no el anterior. 
     });
+    console.log(req.body);
 
     // Si no encontró ninguna tarea devolver un mensaje de error 
     if (!userFound) return res.status(404).json({ message: 'User not found.' });

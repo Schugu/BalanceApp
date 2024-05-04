@@ -11,10 +11,21 @@ function AgregarIngresosPage() {
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
+  const [errores, setErrores] = useState([]);
+
 
   useEffect(() => {
     getProfile();
   }, []);
+
+  useEffect(() => {
+    if (errores.length > 0) {
+      const timer = setTimeout(() => {
+        setErrores([]);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [errores]);
 
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
@@ -25,7 +36,7 @@ function AgregarIngresosPage() {
 
 
     if (dataValid.balance === 0) {
-      alert('Saldo insuficiente');
+      setErrores(['Introdusca un saldo mayor a 0']);
     } else {
       const nuevoSaldo = user.saldo + dataValid.balance;
       updateProfile(user.id, { saldo: nuevoSaldo });
@@ -36,7 +47,7 @@ function AgregarIngresosPage() {
   return (
     <div className="movimientosFormPage-Container">
       {
-        movimientosError.map((error, i) => (
+        errores.map((error, i) => (
           <div key={i} className="errorMessage">
             {error}
           </div>
