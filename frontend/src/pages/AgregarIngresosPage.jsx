@@ -5,58 +5,34 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 
-function MovimientosFormPage() {
+function AgregarIngresosPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
-  const { user, setUser, updateProfile, getProfile } = useAuth();
+  const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
-  const [valorMovimiento, setValorMovimiento] = useState(0);
 
   useEffect(() => {
-    async function loadMovimiento() {
-      getProfile();
-      if (params.id) {
-        const movimiento = await getMovimiento(params.id);
-        setValue('title', movimiento.title);
-        setValue('description', movimiento.description);
-        setValue('balance', movimiento.balance);
-        setValorMovimiento(movimiento.balance);
-      }
-    }
-    loadMovimiento();
+    getProfile();
   }, []);
 
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
+      title: 'Ingreso',
       balance: Math.abs(parseFloat(data.balance)),
     };
 
-    // Modo edición
-    if (params.id) {
-      const saldoOriginal = user.saldo + valorMovimiento;
-      if (dataValid.balance > saldoOriginal) {
-        alert('Saldo insuficiente');
-      } else {
-        const newBalance = saldoOriginal - dataValid.balance;
-        updateProfile(user.id, { saldo: newBalance });
-        updateMovimiento(params.id, dataValid);
-        navigate('/dashboard');
-      }
+
+    if (dataValid.balance === 0) {
+      alert('Saldo insuficiente');
     } else {
-      // Modo creación
-      if (dataValid.balance > user.saldo) {
-        alert('Saldo insuficiente');
-      } else {
-        const newBalance = user.saldo - dataValid.balance;
-        updateProfile(user.id, { saldo: newBalance });
-        createMovimiento(dataValid);
-        navigate('/dashboard');
-      }
+      const nuevoSaldo = user.saldo + dataValid.balance;
+      updateProfile(user.id, { saldo: nuevoSaldo });
+      createMovimiento(dataValid);
+      navigate('/dashboard');
     }
   });
-
   return (
     <div className="movimientosFormPage-Container">
       {
@@ -67,22 +43,6 @@ function MovimientosFormPage() {
         ))
       }
       <form onSubmit={onSubmit} className="movimientosFormPage-Form">
-        <h2>{`Saldo: ${user.saldo} || Valor del movimiento:`}</h2>
-        <label htmlFor="title">Titulo</label>
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          {...register('title', { required: true })}
-          autoFocus
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
-        />
-        {
-          errors.title && (
-            <p className="errorMessage">Titulo is requiere</p>
-          )
-        }
-
         <label htmlFor="description">Descripción</label>
         <textarea
           rows="3"
@@ -114,5 +74,4 @@ function MovimientosFormPage() {
     </div>
   )
 }
-
-export default MovimientosFormPage;
+export default AgregarIngresosPage;

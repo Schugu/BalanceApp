@@ -158,6 +158,26 @@
   align-items: center;
   gap: 20px;
 }
+.dashboardBotones {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  justify-content: space-around;
+}
+.botonLink {
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  padding: 2px 5px;
+}
+.agregarGastos {
+  background-color: #f55856; 
+}
+.agregarIngresos {
+  background-color: #6dc15c; 
+}
 
 .movimientos {
   background-color: #839cc3;

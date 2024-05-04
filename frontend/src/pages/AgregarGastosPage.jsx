@@ -1,0 +1,103 @@
+import { useForm } from "react-hook-form";
+import { useBalance } from "../context/BalanceContext.jsx";
+// El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
+
+function MovimientosFormPage() {
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
+  const { user, updateProfile, getProfile } = useAuth();
+  const navigate = useNavigate();
+  const params = useParams();
+  const [valorMovimiento, setValorMovimiento] = useState(0);
+
+  useEffect(() => {
+    async function loadMovimiento() {
+      getProfile();
+      if (params.id) {
+        const movimiento = await getMovimiento(params.id);
+        setValue('title', movimiento.title);
+        setValue('description', movimiento.description);
+        setValue('balance', movimiento.balance);
+        setValorMovimiento(movimiento.balance);
+      }
+    }
+    loadMovimiento();
+  }, []);
+
+  const onSubmit = handleSubmit((data) => {
+    const dataValid = {
+      ...data,
+      title: 'Gasto',
+      balance: Math.abs(parseFloat(data.balance)),
+    };
+
+    // Modo edición
+    if (params.id) {
+      const saldoOriginal = user.saldo + valorMovimiento;
+      if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
+        alert('Saldo insuficiente');
+      } else {
+        const newBalance = saldoOriginal - dataValid.balance;
+        updateProfile(user.id, { saldo: newBalance });
+        updateMovimiento(params.id, dataValid);
+        navigate('/dashboard');
+      }
+    } else {
+      // Modo creación
+      if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
+        alert('Saldo insuficiente');
+      } else {
+        const newBalance = user.saldo - dataValid.balance;
+        updateProfile(user.id, { saldo: newBalance });
+        createMovimiento(dataValid);
+        navigate('/dashboard');
+      }
+    } 
+  });
+
+  return (
+    <div className="movimientosFormPage-Container">
+      {
+        movimientosError.map((error, i) => (
+          <div key={i} className="errorMessage">
+            {error}
+          </div>
+        ))
+      }
+      <form onSubmit={onSubmit} className="movimientosFormPage-Form">
+        <label htmlFor="description">Descripción</label>
+        <textarea
+          rows="3"
+          placeholder="Description"
+          name="description"
+          {...register('description', { required: true })}
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+        ></textarea>
+        {
+          errors.description && (
+            <p className="errorMessage">Description is requiere</p>
+          )
+        }
+
+        <label htmlFor="number">Balance</label>
+        <input type="number"
+          name="balance"
+          {...register('balance', { required: true })}
+          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
+        />
+        {
+          errors.balance && (
+            <p className="errorMessage">Balance is requiere</p>
+          )
+        }
+
+        <button className="bg-indigo-500 px-3 py-2 rounded-md">Guardar</button>
+      </form>
+    </div>
+  )
+}
+
+export default MovimientosFormPage;

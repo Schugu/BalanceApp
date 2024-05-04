@@ -20,9 +20,7 @@ function Navbar() {
               !
             </li>
             <li>
-              <Link className="botonLink agregar" to='/add-movimiento'>
-                Añadir gastos
-              </Link>
+              hola
             </li>
             <li>
               <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
