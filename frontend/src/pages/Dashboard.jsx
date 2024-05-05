@@ -17,7 +17,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (user && user.saldo) {
-      setSaldoConPuntos(user.saldo.toLocaleString('es-ES'));
+      setSaldoConPuntos(user.saldo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
     }
   }, [user, user.saldo]);
 

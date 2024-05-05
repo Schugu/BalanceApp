@@ -4,6 +4,7 @@ import { useBalance } from "../context/BalanceContext.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
+import Navbar from "../components/navbar/Navbar.jsx"
 
 function MovimientosFormPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
@@ -69,44 +70,53 @@ function MovimientosFormPage() {
   });
 
   return (
-    <div className="movimientosFormPage-Container">
-      {
-        errores.map((error, i) => (
-          <div key={i} className="errorMessage">
-            {error}
-          </div>
-        ))
-      }
-      <form onSubmit={onSubmit} className="movimientosFormPage-Form">
-        <label htmlFor="description">Descripción</label>
-        <textarea
-          rows="3"
-          placeholder="Description"
-          name="description"
-          {...register('description', { required: true })}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
-        ></textarea>
-        {
-          errors.description && (
-            <p className="errorMessage">Description is requiere</p>
-          )
-        }
+    <>
+      <Navbar></Navbar>
 
-        <label htmlFor="number">Balance</label>
-        <input type="number"
-          name="balance"
-          {...register('balance', { required: true })}
-          className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
-        />
+      <div className="movimientosFormPage-Container">
         {
-          errors.balance && (
-            <p className="errorMessage">Balance is requiere</p>
-          )
+          errores.map((error, i) => (
+            <div key={i} className="errorMessage">
+              {error}
+            </div>
+          ))
         }
+        <form onSubmit={onSubmit} className="movimientosFormPage-Form">
+          <label htmlFor="number">Balance</label>
+          <input type="number"
+            step="0.01"
+            name="balance"
+            {...register('balance', { required: true })}
+            className="movimientosFormPage-Form-input valorSaldo"
+            placeholder="$"
+            autoComplete="off"
+          />
+          {
+            errors.balance && (
+              <p className="errorMessage">Balance is requiere</p>
+            )
+          }
 
-        <button className="bg-indigo-500 px-3 py-2 rounded-md">Guardar</button>
-      </form>
-    </div>
+          <label htmlFor="description">Titulo del gasto</label>
+          <textarea
+            rows="3"
+            placeholder="Compra de bicicleta"
+            name="description"
+            {...register('description', { required: true })}
+            className="movimientosFormPage-Form-input descripcionFormInput"
+          ></textarea>
+          {
+            errors.description && (
+              <p className="errorMessage">Description is requiere</p>
+            )
+          }
+          <button className="movimientosFormPage-Form-button movimientosFormPage-Form-button-guardar">Guardar</button>
+        </form>
+          <button 
+          onClick={()=>{navigate('/dashboard')}}
+          className="movimientosFormPage-Form-button movimientosFormPage-Form-button-cancelar">Cancelar</button>
+      </div>
+    </>
   )
 }
 

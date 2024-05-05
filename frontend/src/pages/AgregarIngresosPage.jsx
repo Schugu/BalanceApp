@@ -69,6 +69,7 @@ function AgregarIngresosPage() {
         <label htmlFor="number">Balance</label>
         <input type="number"
           name="balance"
+          step="0.01"
           {...register('balance', { required: true })}
           className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2"
         />

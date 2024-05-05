@@ -1,5 +1,5 @@
 /* CONTENEDOR GENERAL */
-.portada{
+.portada {
   height: 100%;
   width: 100%;
   display: flex;
@@ -7,8 +7,9 @@
   place-items: center;
   font-size: 1.5em;
 }
+
 /* PRIMER CONTENEDOR*/
-.logoAndTitulo{
+.logoAndTitulo {
   width: 100%;
   height: 50%;
   display: flex;
@@ -17,14 +18,18 @@
   gap: 20px;
   padding: 10px;
 }
+
 .logoImg {
-  width: 55vw; /* 15em*/
-  height: 55vw; /* 15em*/
+  width: 55vw;
+  /* 15em*/
+  height: 55vw;
+  /* 15em*/
   max-width: 100%;
   border-radius: 50%;
   overflow: hidden;
   border: 5px solid #14d386;
 }
+
 .logoImg img {
   width: 100%;
   height: auto;
@@ -40,7 +45,7 @@
 }
 
 /* SEGUNDO CONTENDOR */
-.articleInputs{
+.articleInputs {
   display: flex;
   flex-direction: column;
   place-items: center;
@@ -48,12 +53,14 @@
   height: 50%;
   width: 100%;
 }
-.inputsH2{
+
+.inputsH2 {
   font-size: 1em;
   border-bottom: 2px solid #14d386;
   width: 50%;
   text-align: center;
 }
+
 .divInputs {
   display: flex;
   flex-direction: column;
@@ -61,16 +68,19 @@
   gap: 15px;
   width: 100%;
 }
-.containerInput{
+
+.containerInput {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.inputH4{
+
+.inputH4 {
   font-size: .9em;
   width: 70%;
 }
+
 .input {
   width: 70%;
   font-size: .7em;
@@ -80,7 +90,8 @@
   border-bottom: 2px solid #14d386;
   background-color: transparent;
 }
-.input:hover{
+
+.input:hover {
   background-color: #14d38722;
 }
 
@@ -89,17 +100,20 @@
   text-align: right;
   padding-top: 5px;
 }
+
 .linkForgetPassword {
   text-decoration: none;
   font-size: .7em;
   color: #000;
   transition: color 0.3s ease-in-out;
 }
-.linkForgetPassword:hover, .linkRegister:hover{
+
+.linkForgetPassword:hover,
+.linkRegister:hover {
   color: #14d386;
 }
 
-.botonIngresar{
+.botonIngresar {
   width: 70%;
   background-color: #23e899;
   border: none;
@@ -112,12 +126,14 @@
   transition: background-Color 0.3s ease-in-out;
   border-bottom: 4px solid #1ac187;
 }
+
 .botonIngresar:hover {
-  background-color: #1ac187; 
+  background-color: #1ac187;
   border-bottom: 4px solid #23e899;
 }
+
 .botonIngresar:active {
-  background-color: #128f68; 
+  background-color: #128f68;
   border-bottom: 4px solid #1ac187;
 }
 
@@ -128,6 +144,7 @@
   text-align: center;
   /* width: 70%; */
 }
+
 .linkRegister {
   text-decoration: none;
   color: #000;
@@ -152,12 +169,15 @@
 .dashboard {
   background-color: #505f77;
   color: #abccff;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  min-height: 82.7vh;
+  /* !!!!!!!!!!!!!!!!!! */
 }
+
 .dashboardBotones {
   display: flex;
   flex-wrap: wrap;
@@ -166,6 +186,7 @@
   justify-content: space-around;
   background-color: #374151;
 }
+
 .botonLink {
   border-radius: 0.25rem;
   text-decoration: none;
@@ -173,23 +194,25 @@
   text-align: center;
   padding: 2px 5px;
 }
+
 .agregarGastos {
-  background-color: #f55856; 
+  background-color: #f55856;
 }
+
 .agregarIngresos {
-  background-color: #6dc15c; 
+  background-color: #6dc15c;
 }
 
 .movimientos {
   background-color: #839cc3;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: column-reverse;
+  align-items: flex-start;
   gap: 10px;
   width: 100%;
   padding: 20px;
-  min-height: 49vh; /* !!!!!!!!!!!!!!!!!! */
 }
+
 .valorSaldo {
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
@@ -200,20 +223,53 @@
 
 
 /* MovimientosFormPage */
-.movimientosFormPage-Container{
+.movimientosFormPage-Container {
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
   padding: 20px;
 }
-.movimientosFormPage-Form{
+
+.movimientosFormPage-Form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.movimientosFormPage-Form textarea {
+.movimientosFormPage-Form-input {
+  width: 100%;
+  background-color: #4b5563;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.movimientosFormPage-Form-input::placeholder {
+  color: #14d386;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.descripcionFormInput {
   resize: none;
+  font-size: 30px;
+}
+
+.movimientosFormPage-Form-button {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  color: #242930;
+}
+.movimientosFormPage-Form-button-guardar {
+  background-color: #14d386;
+}
+.movimientosFormPage-Form-button-cancelar {
+  background-color: #f55856;
 }
 
 
@@ -227,14 +283,17 @@
   place-content: center;
   background-color: #e9eae2;
 }
-.homePageArticle { 
+
+.homePageArticle {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 .homePageArticleTitle {
   border-bottom: 3px dashed #14d386;
 }
+
 .homePageArticleParagraph {
   text-wrap: wrap;
   text-indent: 20px;
