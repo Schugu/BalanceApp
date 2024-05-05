@@ -14,6 +14,7 @@ function MovimientosFormPage() {
   const params = useParams();
   const [valorMovimiento, setValorMovimiento] = useState(0);
   const [errores, setErrores] = useState([]);
+  const [saldoConPuntos, setSaldoConPuntos] = useState(0);
 
   useEffect(() => {
     async function loadMovimiento() {
@@ -37,6 +38,12 @@ function MovimientosFormPage() {
       return () => clearTimeout(timer);
     }
   }, [errores]);
+
+  useEffect(() => {
+    if (user && user.saldo) {
+      setSaldoConPuntos(user.saldo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+    }
+  }, [user, user.saldo]);
 
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
@@ -74,6 +81,7 @@ function MovimientosFormPage() {
       <Navbar></Navbar>
 
       <div className="movimientosFormPage-Container">
+        <h2 className="movimientosFormPage-h2">Saldo disponible: <span className="verde">$ </span><span className="agregarSaldoIngresoTitulo">{saldoConPuntos}</span></h2>
         {
           errores.map((error, i) => (
             <div key={i} className="errorMessage">
@@ -82,7 +90,7 @@ function MovimientosFormPage() {
           ))
         }
         <form onSubmit={onSubmit} className="movimientosFormPage-Form">
-          <label htmlFor="number">Balance</label>
+          <label className="movimientosFormPage-label" htmlFor="number">Ingrese un monto.</label>
           <input type="number"
             step="0.01"
             name="balance"
@@ -97,7 +105,7 @@ function MovimientosFormPage() {
             )
           }
 
-          <label htmlFor="description">Titulo del gasto</label>
+          <label className="movimientosFormPage-label" htmlFor="description">Ingrese un titulo para el gasto.</label>
           <textarea
             rows="3"
             placeholder="Compra de bicicleta"

@@ -14,7 +14,7 @@ function Navbar() {
       <ul className="lista">
         {isAuthenticated ? (
           <>
-            <li>
+            <li className="welcomeUser">
               ¡Bienvenido
               <Link className="user" to='/profile'>{user.username}</Link>
               !
