@@ -8,6 +8,12 @@
   background-color: #91bafc;
   border-radius: 5px;
 }
+.movIngreso {
+  background-color: #66c852;
+}
+.movGasto {
+  background-color: #eb7472;
+}
 
 .movimientoHeader {
   display: flex;

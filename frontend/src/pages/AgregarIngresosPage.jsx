@@ -1,18 +1,16 @@
 import { useForm } from "react-hook-form";
 import { useBalance } from "../context/BalanceContext.jsx";
 // El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 
 function AgregarIngresosPage() {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-  const { createMovimiento, getMovimiento, updateMovimiento, errors: movimientosError } = useBalance();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { createMovimiento } = useBalance();
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
-  const params = useParams();
   const [errores, setErrores] = useState([]);
-
 
   useEffect(() => {
     getProfile();
@@ -34,7 +32,6 @@ function AgregarIngresosPage() {
       balance: Math.abs(parseFloat(data.balance)),
     };
 
-
     if (dataValid.balance === 0) {
       setErrores(['Introdusca un saldo mayor a 0']);
     } else {
@@ -44,6 +41,7 @@ function AgregarIngresosPage() {
       navigate('/dashboard');
     }
   });
+  
   return (
     <div className="movimientosFormPage-Container">
       {
