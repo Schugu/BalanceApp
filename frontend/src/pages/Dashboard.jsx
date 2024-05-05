@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useBalance } from "../context/BalanceContext.jsx";
 import Navbar from "../components/navbar/Navbar.jsx";
 import MovimientoCard from '../components/movimientoCard/MovimientoCard.jsx';
@@ -8,10 +8,18 @@ import { Link } from "react-router-dom"
 function Dashboard() {
   const { getMovimientos, movimientos } = useBalance();
   const { user, getProfile } = useAuth();
+  const [saldoConPuntos, setSaldoConPuntos] = useState(0);
+
   useEffect(() => {
     getMovimientos();
     getProfile();
   }, [])
+
+  useEffect(() => {
+    if (user && user.saldo) {
+      setSaldoConPuntos(user.saldo.toLocaleString('es-ES'));
+    }
+  }, [user, user.saldo]);
 
   return (
     <>
@@ -25,7 +33,7 @@ function Dashboard() {
             Añadir ingresos
           </Link>
         </article>
-        <h1>Saldo: {user.saldo}</h1>
+        <h1 className="valorSaldo">$ {saldoConPuntos}</h1>
 
         <h1>Movimientos</h1>
 

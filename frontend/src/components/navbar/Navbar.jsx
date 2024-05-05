@@ -20,9 +20,6 @@ function Navbar() {
               !
             </li>
             <li>
-              hola
-            </li>
-            <li>
               <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
                 Cerrar Sesión
               </Link>
