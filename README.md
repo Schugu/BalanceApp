@@ -84,3 +84,6 @@ Para personalizar y comprender el proyecto, sigue estas instrucciones:
 - **Back end**: Si deseas modificar o entender cómo funciona el back end, te recomiendo revisar los archivos y carpetas dentro de `backend`. La lógica de la aplicación se encuentra principalmente en estos archivos.
 
 - **Front end**: Si deseas modificar o entender cómo funciona el front end, te recomiendo revisar los archivos y carpetas dentro de `src`. La lógica de la aplicación se encuentra principalmente en los archivos `App.jsx` y `Main.jsx`, mientras que los componentes individuales se encuentran en la carpeta `src/components`.
+
+### Capturas de pantalla 📸
+<img src='public/CapturaDePantalla1.png' alt='CapturaDePantalla1'>
