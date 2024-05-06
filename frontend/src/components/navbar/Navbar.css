@@ -1,48 +1,73 @@
-.nav {
+.navbar {
   background-color: #374151;
   color: white;
-  padding: 20px;
+  padding: 10px 10px 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.lista {
+.navbar-titulo {
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+}
+.navbar-titulo:hover{
+  color: #7fff00;
+}
+.navbar-link {
+  text-decoration: none;
+  width: fit-content;
+}
+.navbar-lista {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px; 
   list-style: none;
 }
-.lista li {
+.navbar-lista li {
   display: flex;
   justify-content: center;
 }
 
-.titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
+
+
+
+
+
+.navbar-titulo-and-profile{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 10px;
+}
+.navbar-logoImg {
+  width: 60px;
+  height: 60px;
+  max-width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #14d386;
+}
+.navbar-logoImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.navbar-titulo-and-profile-welcomeUser {
+  font-size: 1.7em;
   text-align: center;
-  color: white;
 }
-.titulo:hover{
-  color: #7fff00;
-}
-.link {
-  text-decoration: none;
-}
-.welcomeUser {
-  font-size: 1.5em;
-}
-.user {
-  color: #FFA500;
-  padding-left: 5px;
-  text-decoration: none;  
+.naranja {
+  color: #FFA500;  
 }
 .user:hover{
   text-decoration: underline;
 }
-
 .botonLink {
   border-radius: 0.25rem;
   text-decoration: none;
@@ -66,10 +91,9 @@
 
 
 
+
 @media (max-width: 350px) {
   .lista {
     flex-direction: column;
   }
-
-
 }

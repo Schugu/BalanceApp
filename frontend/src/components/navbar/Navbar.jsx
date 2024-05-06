@@ -6,24 +6,26 @@ function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
 
   return (
-    <nav className="nav">
-      <Link className="link" to={isAuthenticated ? '/dashboard' : '/'}>
-        <h1 className="titulo">Carpincho Eficiente</h1>
-      </Link>
+    <nav className="navbar">
+      <div className="navbar-titulo-and-profile">
+        <Link className="navbar-link" to={isAuthenticated ? '/dashboard' : '/'}>
+          <h1 className="navbar-titulo">Carpincho Eficiente</h1>
+        </Link>
 
-      <ul className="lista">
+      </div>
+
+      <ul className="navbar-lista">
         {isAuthenticated ? (
           <>
-            <li className="welcomeUser">
-              ¡Bienvenido
-              <Link className="user" to='/profile'>{user.username}</Link>
-              !
-            </li>
-            <li>
-              <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
-                Cerrar Sesión
-              </Link>
-            </li>
+            <div className="navbar-titulo-and-profile">
+              <h2 className="navbar-titulo-and-profile-welcomeUser">
+                ¡Bienvenido <span className="naranja">{user.username}</span>! 
+              </h2>
+
+              <section className='navbar-logoImg'>
+                <Link to='/profile'><img src="CarpinchoPlatudo.jpg" alt="fotoDePerfil" /></Link>
+              </section>
+            </div>
           </>
         ) : (
           <>

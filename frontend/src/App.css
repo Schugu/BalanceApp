@@ -177,6 +177,14 @@
   min-height: 82.7vh;
   /* !!!!!!!!!!!!!!!!!! */
 }
+.valorSaldo {
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 3em;
+  color: #23e899;
+}
 
 .dashboardBotones {
   display: flex;
@@ -193,6 +201,7 @@
   color: white;
   text-align: center;
   padding: 2px 5px;
+  font-size: 1.3em;
 }
 
 .agregarGastos {
@@ -213,13 +222,6 @@
   padding: 20px;
 }
 
-.valorSaldo {
-  font-family: "Rubik", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 50px;
-}
 
 
 /* MovimientosFormPage */
