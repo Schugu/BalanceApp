@@ -4,7 +4,7 @@
 
 🎯 Objetivo: Desarrollar una aplicación tipo Wallet virtual.
 
-Esta idea de proyecto está basada en un proyecto anterior en el que aprendí a hacer un sistema de usuarios en la base de datos MongoDB y un CRUD. 
+Esta idea de proyecto está basada en un proyecto anterior en el que aprendí a hacer un sistema de usuarios con la base de datos MongoDB y un CRUD. 
 
 Esta aplicación te permite registrarte y acceder con tus credenciales, con validaciones tanto en el frontend como en el backend. Una vez iniciada la sesión, te lleva al dashboard, donde puedes agregar ingresos y registrar gastos. El sistema de ingresos simula la acción de recibir dinero, permitiéndote especificar la cantidad y el título de la transacción. De manera similar, en el sistema de gastos puedes registrar tus egresos, indicando la cantidad y una breve descripción. Ambos sistemas cuentan con validaciones en el frontend y realizan el cálculo correspondiente para mantener actualizado el balance. Es importante destacar que esta aplicación es únicamente con fines prácticos y de aprendizaje, por lo que no es tan específica ni complicada como una aplicación financiera real.
 
