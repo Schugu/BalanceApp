@@ -3,7 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import './Navbar.css'
 
 function Navbar() {
-  const { isAuthenticated, logout, user } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <nav className="navbar">

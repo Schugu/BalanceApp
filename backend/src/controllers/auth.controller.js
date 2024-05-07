@@ -17,7 +17,7 @@ import { TOKEN_SECRET } from '../config.js';
 export const register = async (req, res) => {
   // Extraer datos relevantes
   const { email, password, username } = req.body;
-  
+
   try {
     // Buscar un usuario que coincida con el correo electrónico
     const userFound = await User.findOne({ $or: [{ email }, { username }] });
@@ -26,7 +26,7 @@ export const register = async (req, res) => {
     if (userFound) {
       return res.status(400).json({ message: "Username or email is already in use" });
     }
-    
+
     // Metodo de bcrypt que transforma un string en una serie de caracteres aleatorios. 
     // Esto va a encriptar la contraseña. El 10 indica cuantas veces se va a ejecutar el algoritmo. 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -57,7 +57,7 @@ export const register = async (req, res) => {
       updatedAt: userSaved.updatedAt,
       saldo: userSaved.saldo
     });
-    
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -115,7 +115,7 @@ export const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
 
   // Si no se encuentra el usuario lanzar un mensaje de error
-  if(!userFound) return res.status(400).json({ message: 'User not found' });
+  if (!userFound) return res.status(400).json({ message: 'User not found' });
 
   // Si el usuario es encontrado retornar lo siguiente:
   return res.json({
@@ -131,7 +131,7 @@ export const profile = async (req, res) => {
 // Peticion que se realiza cada vez que la página cargue
 export const verifyToken = async (req, res) => {
   // Almacenar el token
-  const {token} = req.cookies;
+  const { token } = req.cookies;
 
   // Si no hay token lanzar un mensaje de error.
   if (!token) return res.status(401).json({ message: 'Unauthorized' });
@@ -155,8 +155,6 @@ export const verifyToken = async (req, res) => {
     })
   });
 }
-
-
 
 
 // Obtener perfiles
