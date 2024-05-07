@@ -436,3 +436,6 @@ input[type='number']::-webkit-outer-spin-button {
   font-weight: 300;
   font-style: normal;
 }
+.signoPesoProfile{
+  color: #ff4500;
+}

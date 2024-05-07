@@ -71,10 +71,10 @@ function ProfilePage() {
         </div>
 
         <div className="pageProfile-datos">
-          <h2 className="pageProfile-datos-dato">Balance</h2>
-          <h3 className="pageProfile-datos-dato">Saldo: $<span className="blanco">{saldoConPuntos}</span></h3>
-          <h3 className="pageProfile-datos-dato">Ingresos totales: $<span className="blanco">{ingresosTotales}</span></h3>
-          <h3 className="pageProfile-datos-dato">Gastos totales: $<span className="blanco">{egresosTotales}</span></h3>
+          <h2 className="pageProfile-datos-titulo">Balance</h2>
+          <h3 className="pageProfile-datos-dato">Saldo: <span className="signoPesoProfile">$</span> <span className="blanco">{saldoConPuntos}</span></h3>
+          <h3 className="pageProfile-datos-dato">Ingresos totales: <span className="signoPesoProfile">$</span> <span className="blanco">{ingresosTotales}</span></h3>
+          <h3 className="pageProfile-datos-dato">Gastos totales: <span className="signoPesoProfile">$</span> <span className="blanco">{egresosTotales}</span></h3>
         </div>
 
         <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
