@@ -340,11 +340,12 @@ input[type='number']::-webkit-outer-spin-button {
 /* PROFILEPAGE */
 .pageProfile {
   height: 100vh;
-  background-color: #128f68;
+  background-color: #374151;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #14d386;
 }
 
 .pageProfile-2 {
@@ -356,7 +357,7 @@ input[type='number']::-webkit-outer-spin-button {
   height: 97%;
   width: 95%;
   border-radius: 5px;
-  background-color: #51e8ac;
+  background-color: #505f77;
   padding: 10px;
 }
 
@@ -419,10 +420,19 @@ input[type='number']::-webkit-outer-spin-button {
 
 .pageProfile-tittle {
   font-size: 2em;
-  border-bottom: 2px solid #505f77;
+  border-bottom: 2px solid #14d386;
   padding: 0 20px;
 }
 
 .pageProfile-datos-dato {
-  text-align: right;
+  text-align: left;
+  border-top: 1px dashed #fff;
+  padding: 5px;
+}
+.blanco {
+  color: #fff;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }

@@ -64,13 +64,17 @@ function ProfilePage() {
 
         <div className="pageProfile-datos">
           <h2 className="pageProfile-datos-titulo">Datos</h2>
-          <h3 className="pageProfile-datos-dato">Email: {user.email}</h3>
+          <h3 className="pageProfile-datos-dato">Nombre completo: <span className="blanco">Luis Petri</span></h3>
+          <h3 className="pageProfile-datos-dato">Email: <span className="blanco">{user.email}</span></h3>
+          <h3 className="pageProfile-datos-dato">Número: <span className="blanco">+54 3794 30 000</span></h3>
+          <h3 className="pageProfile-datos-dato">Dirección: <span className="blanco">Juan Bautista Alberdi 2024</span></h3>
         </div>
 
-        <div>
-          <h2>Saldo: {saldoConPuntos}</h2>
-          <h2>Ingresos totales: {ingresosTotales}</h2>
-          <h2>Gastos totales: {egresosTotales}</h2>
+        <div className="pageProfile-datos">
+          <h2 className="pageProfile-datos-dato">Balance</h2>
+          <h3 className="pageProfile-datos-dato">Saldo: $<span className="blanco">{saldoConPuntos}</span></h3>
+          <h3 className="pageProfile-datos-dato">Ingresos totales: $<span className="blanco">{ingresosTotales}</span></h3>
+          <h3 className="pageProfile-datos-dato">Gastos totales: $<span className="blanco">{egresosTotales}</span></h3>
         </div>
 
         <Link className="botonLink cerrar" to='/' onClick={() => { logout() }}>
