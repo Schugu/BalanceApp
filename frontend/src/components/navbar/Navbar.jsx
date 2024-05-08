@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext";
 import './Navbar.css'
+import { useEffect } from "react";
 
 function Navbar() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, getProfile} = useAuth();
+
+  useEffect(() => {
+    getProfile();
+  }, [isAuthenticated, user])
 
   return (
     <nav className="navbar">

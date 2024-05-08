@@ -59,6 +59,7 @@ function HomePage() {
           </p>
         </article>
       </section>
+
     </div>
   )
 }

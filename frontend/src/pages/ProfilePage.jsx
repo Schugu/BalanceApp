@@ -79,7 +79,9 @@ function ProfilePage() {
         <div className="pageProfile-titlteAndImage">
           <section className="pageProfile-buttonBack-container">
             <button className="pageProfile-buttonBack" onClick={() => { navigate('/dashboard') }}>
-              <img src="./icons/backArrow.svg" alt="" /></button></section>
+              <img src="./icons/backArrow.svg" alt="" />
+            </button>
+          </section>
 
           <input
             type="file"
