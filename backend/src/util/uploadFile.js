@@ -1,4 +1,4 @@
-import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage"; // importar metodos de firebase
+import { ref, getDownloadURL, uploadBytesResumable, deleteObject  } from "firebase/storage"; // importar metodos de firebase
 import { storage } from "../firebase.js"; // importar nuestra config de firebase
 import sharp from "sharp"; // Modulo para optimizar imagenes y que pesen menos
 

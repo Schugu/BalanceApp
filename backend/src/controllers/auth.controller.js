@@ -262,7 +262,6 @@ export const uploadProfilePhoto = async (req, res) => {
 
     if (photoExists) {
       await deleteFile(`files/ProfilePhotoOf${usuario._id}`);
-      console.log("Foto anterior borrada");
     }
 
     const { downloadUrl } = await uploadFile(image[0], usuario._id);
@@ -271,7 +270,6 @@ export const uploadProfilePhoto = async (req, res) => {
       urlImage: downloadUrl,
     };
     await usuario.save();
-    console.log("Foto nueva creada")
 
     return res.status(200).json({ usuario });
   }
