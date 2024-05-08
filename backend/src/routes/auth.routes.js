@@ -29,7 +29,7 @@ import { registerSchema, loginSchema, balanceSchema } from '../schemas/auth.sche
 // Importar el multer import
 // import multer from "multer";
 // export const upload = multer({ dest: './src/storage/imgs' });
-import { upload } from "../libs/storage.js";
+import { upload } from "../libs/multer.js";
 
 
 
@@ -64,7 +64,12 @@ router.put('/profiles/:id', authRequire, validateSchema(balanceSchema), updatePr
 router.delete('/profiles/:id', authRequire, deleteProfileById);
 
 // ruta para agregar foto
-router.post('/profiles/:id/profile-photo', authRequire, upload.single('profilePhoto'), uploadProfilePhoto);
+router.post(
+  '/profiles/:id/profile-photo',
+  authRequire,
+  upload.fields([{ name: 'profilePhoto', maxCount: 1}]),
+  uploadProfilePhoto
+);
 
 router.get('/profiles/:id/profile-photo', authRequire, getProfilePhoto);
 

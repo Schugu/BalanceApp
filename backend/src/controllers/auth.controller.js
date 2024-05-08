@@ -256,17 +256,24 @@ export const deleteProfileById = async (req, res) => {
 
 // Cargar imagen de usuario 
 export const uploadProfilePhoto = async (req, res) => {
-  try {
-    const usuario = await User.findById(req.user.id);
-    usuario.profilePhoto = {
-      urlImage: req.file.filename,
-    };
+  // try {
+  //   const usuario = await User.findById(req.user.id);
+  //   usuario.profilePhoto = {
+  //     urlImage: req.file.filename,
+  //   };
     
-    await usuario.save();
+  //   await usuario.save();
 
-    res.status(201).send('Imagen de usuario guardada correctamente.');
-  } catch (error) {
-    res.status(500).send('Error al guardar la imagen de usuario.');
+  //   res.status(201).send('Imagen de usuario guardada correctamente.');
+  // } catch (error) {
+  //   res.status(500).send('Error al guardar la imagen de usuario.');
+  // }
+
+  const body = req.body;
+  const image = req.files.image;
+
+  if (image && image.lenght > 0) {
+    
   }
 };
 
