@@ -23,7 +23,7 @@ function Navbar() {
               </h2>
 
               <section className='navbar-logoImg'>
-                <Link to='/profile'><img src="CarpinchoPlatudo.jpg" alt="fotoDePerfil" /></Link>
+                <Link to='/profile'><img src={user.profilePhoto} alt="fotoDePerfil" /></Link>
               </section>
             </div>
           </>
