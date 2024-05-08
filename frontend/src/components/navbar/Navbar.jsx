@@ -19,11 +19,14 @@ function Navbar() {
           <>
             <div className="navbar-titulo-and-profile">
               <h2 className="navbar-titulo-and-profile-welcomeUser">
-                ¡Bienvenido <span className="naranja">{user.username}</span>! 
+                ¡Bienvenido <span className="naranja">{user.username}</span>!
               </h2>
 
               <section className='navbar-logoImg'>
-                <Link to='/profile'><img src={user.profilePhoto} alt="fotoDePerfil" /></Link>
+                <Link to='/profile'>
+                  <img src={user.profilePhoto ? user.profilePhoto : "CarpinchoPlatudo.jpg"} 
+                  alt="fotoDePerfil" />
+                </Link>
               </section>
             </div>
           </>
