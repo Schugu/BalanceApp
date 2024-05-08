@@ -12,3 +12,6 @@ export const verifyTokenRequest = () => axios.get('/verify');
 export const updateProfileRequest = (id, balance) => axios.put(`/profiles/${id}`, balance);
 
 export const getProfileRequest = () => axios.get(`/profile`);
+
+// Peticiones para foto de perifl
+export const createProfilePhotoRequest = (id, formData) => axios.post(`/profiles/${id}/profile-photo`, formData);

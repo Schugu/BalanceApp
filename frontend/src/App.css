@@ -409,6 +409,7 @@ input[type='number']::-webkit-outer-spin-button {
   overflow: hidden;
   border: 5px solid #14d386;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .pageProfile-logoImg img {

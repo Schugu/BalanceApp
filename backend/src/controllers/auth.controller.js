@@ -236,7 +236,6 @@ export const deleteProfileById = async (req, res) => {
 export const uploadProfilePhoto = async (req, res) => {
   const image = req.files.profilePhoto;
 
-  console.log(image);
   if (image && image.length > 0) {
     const usuario = await User.findById(req.user.id);
 
@@ -252,8 +251,6 @@ export const uploadProfilePhoto = async (req, res) => {
 
   return res.status(400).json({ message: 'Debes enviar una imagen' });
 };
-
-
 
 export const getProfilePhoto = async (req, res) => {
   try {

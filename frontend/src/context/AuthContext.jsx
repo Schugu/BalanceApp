@@ -7,7 +7,8 @@ import {
   loginRequest,
   verifyTokenRequest,
   updateProfileRequest,
-  getProfileRequest
+  getProfileRequest,
+  createProfilePhotoRequest
 } from "../api/auth.js";
 
 // Importar el js-cookie
@@ -108,6 +109,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Crear foto de perfil 
+  const createProfilePhoto = async (id, formData) => {
+    try {
+      await createProfilePhotoRequest(id, formData);
+    } catch (error) {
+      // Si es un array devolverlo solamente
+      if (Array.isArray(error.response.data)) {
+        return setErrors(error.response.data);
+      }
+      // Sino devolverlo como un array
+      setErrors([error.response.data.message]);
+    }
+  }
+
   // Funcion para eliminar los mensajes de error despues de un tiempo.
   useEffect(() => {
     if (errors.length > 0) {
@@ -171,7 +186,8 @@ export const AuthProvider = ({ children }) => {
       loading,
       updateProfile,
       getProfile,
-      setUser
+      setUser,
+      createProfilePhoto
     }}>
       {children}
     </AuthContext.Provider>

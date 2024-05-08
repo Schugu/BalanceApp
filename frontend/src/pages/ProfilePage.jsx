@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useBalance } from "../context/BalanceContext.jsx";
 import { Link, useNavigate } from "react-router-dom"
 
 function ProfilePage() {
   const [saldoConPuntos, setSaldoConPuntos] = useState(0);
-  const { user, getProfile, logout } = useAuth();
+  const { user, getProfile, logout, createProfilePhoto } = useAuth();
   const { getMovimientos, movimientos } = useBalance();
   const [ingresosTotales, setIngresosTotales] = useState(0);
   const [egresosTotales, setEgresosTotales] = useState(0);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const formatearCifra = (cifra) => {
     let cifraFormateada = cifra.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -46,19 +47,49 @@ function ProfilePage() {
     setEgresosTotales(formatearCifra(totalEgresos));
   }, [movimientos]);
 
+  const handleFileChange = (event) => {
+    handleFileUpload(event.target.files[0]);
+  };
 
+  const handleFileUpload = async (file) => {
+    if (!file) {
+      console.error('No se ha seleccionado ningún archivo.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('profilePhoto', file);
+    
+    try {
+      await createProfilePhoto(user.id, formData); 
+      getProfile();
+    } catch (error) {
+      console.error('Error al subir el archivo:', error);
+    }
+  };
+
+  const handleProfileClick = () => {
+    fileInputRef.current.click();
+  };
+  
   return (
     <section className="pageProfile">
       <article className="pageProfile-2">
 
         <div className="pageProfile-titlteAndImage">
           <section className="pageProfile-buttonBack-container">
-            <button className="pageProfile-buttonBack" onClick={()=>{navigate('/dashboard')}}>
+            <button className="pageProfile-buttonBack" onClick={() => { navigate('/dashboard') }}>
               <img src="./icons/backArrow.svg" alt="" /></button></section>
 
-          <section className='pageProfile-logoImg'>
-            <img src={user.profilePhoto ? user.profilePhoto : "CarpinchoPlatudo.jpg"}  
-            alt="fotoDePerfil" />
+          <input
+            type="file"
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+            ref={fileInputRef}
+          />
+          <section className='pageProfile-logoImg' onClick={handleProfileClick}>
+            <img src={user.profilePhoto ? user.profilePhoto : "CarpinchoPlatudo.jpg"}
+              alt="fotoDePerfil" />
           </section>
           <h1 className="pageProfile-tittle">{user.username}</h1>
         </div>
