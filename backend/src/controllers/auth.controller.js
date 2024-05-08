@@ -13,6 +13,15 @@ import jwt from 'jsonwebtoken';
 // Importar el TOKEN_SECRET
 import { TOKEN_SECRET } from '../config.js';
 
+// Importar el env
+import dotenv from 'dotenv';
+dotenv.config();
+const host = process.env.APP_HOST;
+const port = process.env.APP_PORT;
+
+// Importar el rename de node
+// import fs from "node:fs";
+
 // Funciones que nos permitan procesar peticiones.
 export const register = async (req, res) => {
   // Extraer datos relevantes
@@ -228,3 +237,52 @@ export const deleteProfileById = async (req, res) => {
     res.status(500).json({ message: 'Error deleting profile' });
   }
 }
+
+
+// Subir imagen
+// const saveImage = (file)=> {
+//   const newPath = `./src/storage/imgs/${file.originalname}`;
+//   fs.renameSync(file.path, newPath);
+//   return newPath;
+// }
+// export const uploadProfilePhoto = (req, res) => {
+//   const filename = req.file.filename;
+//   console.log(req.file);
+//   // saveImage(req.file);
+//   res.send(`La foto de perfil ${filename} se ha cargado exitosamente.`);
+// };
+
+
+
+// Cargar imagen de usuario 
+export const uploadProfilePhoto = async (req, res) => {
+  try {
+    const usuario = await User.findById(req.user.id);
+    usuario.profilePhoto = {
+      urlImage: req.file.filename,
+    };
+    
+    await usuario.save();
+
+    res.status(201).send('Imagen de usuario guardada correctamente.');
+  } catch (error) {
+    res.status(500).send('Error al guardar la imagen de usuario.');
+  }
+};
+
+
+export const getProfilePhoto = async (req, res) => {
+  try {
+    const usuario = await User.findById(req.user.id);
+    if (!usuario || !usuario.profilePhoto) {
+      return res.status(404).send('Imagen de usuario no encontrada.');
+    }
+    const imageUrl = `${host}:${port}/src/storage/imgs/${usuario.profilePhoto.urlImage}`;
+
+    res.send(imageUrl);
+
+
+  } catch (error) {
+    res.status(500).send('Error al recuperar la imagen de usuario.');
+  }
+};

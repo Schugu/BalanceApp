@@ -11,7 +11,9 @@ import {
   getProfiles,
   getProfileById,
   updateProfileById,
-  deleteProfileById
+  deleteProfileById,
+  uploadProfilePhoto,
+  getProfilePhoto
 } from '../controllers/auth.controller.js';
 
 // Importar el authRequiere de validateToken.js
@@ -22,6 +24,15 @@ import { validateSchema } from '../middlewares/validator.middleware.js'
 
 // Importar el auth.schema
 import { registerSchema, loginSchema, balanceSchema } from '../schemas/auth.schema.js'
+
+
+// Importar el multer import
+// import multer from "multer";
+// export const upload = multer({ dest: './src/storage/imgs' });
+import { upload } from "../libs/storage.js";
+
+
+
 
 // Guardar objeto dado por Router en una const
 const router = Router();
@@ -52,7 +63,10 @@ router.put('/profiles/:id', authRequire, validateSchema(balanceSchema), updatePr
 // Eliminar un perfil por id
 router.delete('/profiles/:id', authRequire, deleteProfileById);
 
+// ruta para agregar foto
+router.post('/profiles/:id/profile-photo', authRequire, upload.single('profilePhoto'), uploadProfilePhoto);
 
+router.get('/profiles/:id/profile-photo', authRequire, getProfilePhoto);
 
 
 

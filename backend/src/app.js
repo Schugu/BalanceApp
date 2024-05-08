@@ -44,6 +44,7 @@ app.use('/api', authRoutes);
 // Que app utilice el balanceRoutes
 app.use('/api', balanceRoutes);
 
+
 export default app 
 
 
