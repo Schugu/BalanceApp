@@ -59,9 +59,9 @@ function ProfilePage() {
 
     const formData = new FormData();
     formData.append('profilePhoto', file);
-    
+
     try {
-      await createProfilePhoto(user.id, formData); 
+      await createProfilePhoto(user.id, formData);
       getProfile();
     } catch (error) {
       console.error('Error al subir el archivo:', error);
@@ -71,7 +71,7 @@ function ProfilePage() {
   const handleProfileClick = () => {
     fileInputRef.current.click();
   };
-  
+
   return (
     <section className="pageProfile">
       <article className="pageProfile-2">
@@ -88,8 +88,15 @@ function ProfilePage() {
             ref={fileInputRef}
           />
           <section className='pageProfile-logoImg' onClick={handleProfileClick}>
-            <img src={user.profilePhoto ? user.profilePhoto : "CarpinchoPlatudo.jpg"}
-              alt="fotoDePerfil" />
+            <img
+              src=
+              {
+                user.profilePhoto && user.profilePhoto.urlImage
+                  ? user.profilePhoto.urlImage
+                  : "CarpinchoPlatudo.jpg"
+              }
+              alt="fotoDePerfil"
+            />
           </section>
           <h1 className="pageProfile-tittle">{user.username}</h1>
         </div>

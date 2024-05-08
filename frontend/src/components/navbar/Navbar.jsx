@@ -24,8 +24,15 @@ function Navbar() {
 
               <section className='navbar-logoImg'>
                 <Link to='/profile'>
-                  <img src={user.profilePhoto ? user.profilePhoto : "CarpinchoPlatudo.jpg"} 
-                  alt="fotoDePerfil" />
+                  <img
+                    src=
+                    {
+                      user.profilePhoto && user.profilePhoto.urlImage
+                        ? user.profilePhoto.urlImage
+                        : "CarpinchoPlatudo.jpg"
+                    }
+                    alt="fotoDePerfil"
+                  />
                 </Link>
               </section>
             </div>

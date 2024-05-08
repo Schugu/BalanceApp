@@ -128,7 +128,9 @@ export const profile = async (req, res) => {
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
     saldo: userFound.saldo,
-    profilePhoto: userFound.profilePhoto.urlImage
+    profilePhoto: {
+      urlImage: userFound.profilePhoto.urlImage
+    }
   });
 };
 
@@ -264,5 +266,28 @@ export const getProfilePhoto = async (req, res) => {
 
   } catch (error) {
     res.status(400).json({ message: 'Error al recuperar la imagen de usuario.' });
+  }
+};
+
+export const deleteProfilePhoto = async (req, res) => {
+  try {
+    // Buscar al usuario por su ID
+    const usuario = await User.findById(req.user.id);
+
+    // Verificar si el usuario existe y si tiene una foto de perfil
+    if (!usuario || !usuario.profilePhoto) {
+      return res.status(404).send('Imagen de usuario no encontrada.');
+    }
+
+    // Eliminar la propiedad profilePhoto del usuario
+    usuario.profilePhoto = null;
+    await usuario.save();
+
+    // Devolver un mensaje de éxito
+    return res.status(200).json({ message: 'La foto de perfil se ha eliminado correctamente.' });
+  } catch (error) {
+    // Manejar cualquier error que ocurra durante el proceso
+    console.error('Error al eliminar la foto de perfil:', error);
+    return res.status(500).json({ message: 'Error interno del servidor.' });
   }
 };
