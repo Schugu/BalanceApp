@@ -13,8 +13,6 @@ import {
   updateProfileById,
   deleteProfileById,
   uploadProfilePhoto,
-  getProfilePhoto,
-  deleteProfilePhoto
 } from '../controllers/auth.controller.js';
 
 // Importar el authRequiere de validateToken.js
@@ -71,11 +69,6 @@ router.post(
   upload.fields([{ name: 'profilePhoto', maxCount: 1}]),
   uploadProfilePhoto
 );
-
-router.get('/profiles/:id/profile-photo', authRequire, getProfilePhoto);
-
-router.delete('/profiles/:id/profile-photo', authRequire, deleteProfilePhoto);
-
 
 
 

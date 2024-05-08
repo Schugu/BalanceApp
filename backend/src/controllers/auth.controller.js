@@ -14,7 +14,7 @@ import jwt from 'jsonwebtoken';
 import { TOKEN_SECRET } from '../config.js';
 
 // Importar el uploadFile para el firebase
-import { uploadFile } from "../util/uploadFile.js";
+import { uploadFile, profilePhotoExists, deleteFile } from "../util/uploadFile.js";
 
 // Funciones que nos permitan procesar peticiones.
 export const register = async (req, res) => {
@@ -234,26 +234,8 @@ export const deleteProfileById = async (req, res) => {
   }
 }
 
+
 // Cargar imagen de usuario 
-export const uploadProfilePhoto = async (req, res) => {
-  const image = req.files.profilePhoto;
-
-  if (image && image.length > 0) {
-    const usuario = await User.findById(req.user.id);
-
-    const { downloadUrl } = await uploadFile(image[0], usuario._id);
-
-    usuario.profilePhoto = {
-      urlImage: downloadUrl,
-    };
-    await usuario.save();
-
-    return res.status(200).json({ usuario });
-  }
-
-  return res.status(400).json({ message: 'Debes enviar una imagen' });
-};
-
 export const getProfilePhoto = async (req, res) => {
   try {
     const usuario = await User.findById(req.user.id);
@@ -269,25 +251,31 @@ export const getProfilePhoto = async (req, res) => {
   }
 };
 
-export const deleteProfilePhoto = async (req, res) => {
-  try {
-    // Buscar al usuario por su ID
+export const uploadProfilePhoto = async (req, res) => {
+  const image = req.files.profilePhoto;
+
+  if (image && image.length > 0) {
     const usuario = await User.findById(req.user.id);
 
-    // Verificar si el usuario existe y si tiene una foto de perfil
-    if (!usuario || !usuario.profilePhoto) {
-      return res.status(404).send('Imagen de usuario no encontrada.');
+
+    const photoExists = await profilePhotoExists(usuario._id);
+
+    if (photoExists) {
+      await deleteFile(`files/ProfilePhotoOf${usuario._id}`);
+      console.log("Foto anterior borrada");
     }
 
-    // Eliminar la propiedad profilePhoto del usuario
-    usuario.profilePhoto = null;
-    await usuario.save();
+    const { downloadUrl } = await uploadFile(image[0], usuario._id);
 
-    // Devolver un mensaje de éxito
-    return res.status(200).json({ message: 'La foto de perfil se ha eliminado correctamente.' });
-  } catch (error) {
-    // Manejar cualquier error que ocurra durante el proceso
-    console.error('Error al eliminar la foto de perfil:', error);
-    return res.status(500).json({ message: 'Error interno del servidor.' });
+    usuario.profilePhoto = {
+      urlImage: downloadUrl,
+    };
+    await usuario.save();
+    console.log("Foto nueva creada")
+
+    return res.status(200).json({ usuario });
   }
+
+  return res.status(400).json({ message: 'Debes enviar una imagen' });
 };
+
