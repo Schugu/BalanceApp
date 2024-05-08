@@ -57,7 +57,7 @@ function ProfilePage() {
               <img src="./icons/backArrow.svg" alt="" /></button></section>
 
           <section className='pageProfile-logoImg'>
-            <img src="CarpinchoPlatudo.jpg" alt="fotoDePerfil" />
+            <img src={user.profilePhoto} alt="fotoDePerfil" />
           </section>
           <h1 className="pageProfile-tittle">{user.username}</h1>
         </div>

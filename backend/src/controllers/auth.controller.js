@@ -13,14 +13,8 @@ import jwt from 'jsonwebtoken';
 // Importar el TOKEN_SECRET
 import { TOKEN_SECRET } from '../config.js';
 
-// Importar el env
-import dotenv from 'dotenv';
-dotenv.config();
-const host = process.env.APP_HOST;
-const port = process.env.APP_PORT;
-
-// Importar el rename de node
-// import fs from "node:fs";
+// Importar el uploadFile para el firebase
+import { uploadFile } from "../util/uploadFile.js";
 
 // Funciones que nos permitan procesar peticiones.
 export const register = async (req, res) => {
@@ -133,7 +127,8 @@ export const profile = async (req, res) => {
     email: userFound.email,
     createdAt: userFound.createdAt,
     updatedAt: userFound.updatedAt,
-    saldo: userFound.saldo
+    saldo: userFound.saldo,
+    profilePhoto: userFound.profilePhoto.urlImage
   });
 };
 
@@ -207,7 +202,6 @@ export const updateProfileById = async (req, res) => {
     const userFound = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true // Esto significa que nos debe dar el dato actualizado y no el anterior. 
     });
-    console.log(req.body);
 
     // Si no encontró ninguna tarea devolver un mensaje de error 
     if (!userFound) return res.status(404).json({ message: 'User not found.' });
@@ -238,58 +232,40 @@ export const deleteProfileById = async (req, res) => {
   }
 }
 
-
-// Subir imagen
-// const saveImage = (file)=> {
-//   const newPath = `./src/storage/imgs/${file.originalname}`;
-//   fs.renameSync(file.path, newPath);
-//   return newPath;
-// }
-// export const uploadProfilePhoto = (req, res) => {
-//   const filename = req.file.filename;
-//   console.log(req.file);
-//   // saveImage(req.file);
-//   res.send(`La foto de perfil ${filename} se ha cargado exitosamente.`);
-// };
-
-
-
 // Cargar imagen de usuario 
 export const uploadProfilePhoto = async (req, res) => {
-  // try {
-  //   const usuario = await User.findById(req.user.id);
-  //   usuario.profilePhoto = {
-  //     urlImage: req.file.filename,
-  //   };
-    
-  //   await usuario.save();
+  const image = req.files.profilePhoto;
 
-  //   res.status(201).send('Imagen de usuario guardada correctamente.');
-  // } catch (error) {
-  //   res.status(500).send('Error al guardar la imagen de usuario.');
-  // }
+  console.log(image);
+  if (image && image.length > 0) {
+    const usuario = await User.findById(req.user.id);
 
-  const body = req.body;
-  const image = req.files.image;
+    const { downloadUrl } = await uploadFile(image[0], usuario._id);
 
-  if (image && image.lenght > 0) {
-    
+    usuario.profilePhoto = {
+      urlImage: downloadUrl,
+    };
+    await usuario.save();
+
+    return res.status(200).json({ usuario });
   }
+
+  return res.status(400).json({ message: 'Debes enviar una imagen' });
 };
+
 
 
 export const getProfilePhoto = async (req, res) => {
   try {
     const usuario = await User.findById(req.user.id);
+
     if (!usuario || !usuario.profilePhoto) {
       return res.status(404).send('Imagen de usuario no encontrada.');
     }
-    const imageUrl = `${host}:${port}/src/storage/imgs/${usuario.profilePhoto.urlImage}`;
 
-    res.send(imageUrl);
-
+    res.status(200).json({ usuario });
 
   } catch (error) {
-    res.status(500).send('Error al recuperar la imagen de usuario.');
+    res.status(400).json({ message: 'Error al recuperar la imagen de usuario.' });
   }
 };

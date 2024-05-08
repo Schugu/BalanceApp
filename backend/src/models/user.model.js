@@ -1,35 +1,38 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 // Datos que esperamos guardar de los usuarios. 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    require: true,
+    required: true,
     trim: true,
     unique: true
   },
   email: {
     type: String,
-    require: true,
+    required: true,
     trim: true,
     unique: true
   },
   password: {
     type: String,
-    require: true,
+    required: true,
     trim: true
   },
   saldo: {
     type: Number,
     min: 0, 
-    require: true,
+    required: true,
   },
   profilePhoto: {
-    urlImage: String
+    urlImage: {
+      type: String,
+      required: true
+    }
   }
 }, {
   timestamps: true
 });
 
-              // Esto para interactuar con la base de datos con los metodos.
+// Esto para interactuar con la base de datos con los métodos.
 export default mongoose.model('User', userSchema);
