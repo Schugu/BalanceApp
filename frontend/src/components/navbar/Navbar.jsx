@@ -8,7 +8,7 @@ function Navbar() {
 
   useEffect(() => {
     getProfile();
-  }, [isAuthenticated, user])
+  }, [isAuthenticated])
 
   return (
     <nav className="navbar">

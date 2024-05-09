@@ -4,7 +4,8 @@ import { useBalance } from "../context/BalanceContext.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
-import Navbar from "../components/navbar/Navbar.jsx"
+import Navbar from "../components/navbar/Navbar.jsx";
+import Modal from "../components/Modal/Modal.jsx";
 
 function MovimientosFormPage() {
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
@@ -15,6 +16,8 @@ function MovimientosFormPage() {
   const [valorMovimiento, setValorMovimiento] = useState(0);
   const [errores, setErrores] = useState([]);
   const [saldoConPuntos, setSaldoConPuntos] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [datosParaModal, setdatosParaModal] = useState([]);
 
   useEffect(() => {
     async function loadMovimiento() {
@@ -52,34 +55,47 @@ function MovimientosFormPage() {
       balance: Math.abs(parseFloat(data.balance)),
     };
 
-    // Modo edición
-    if (params.id) {
-      const saldoOriginal = user.saldo + valorMovimiento;
-      if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
-        setErrores(['Saldo insuficiente']);
-      } else {
-        const newBalance = saldoOriginal - dataValid.balance;
-        updateProfile(user.id, { saldo: newBalance });
-        updateMovimiento(params.id, dataValid);
-        navigate('/dashboard');
-      }
+    // // Modo edición
+    // if (params.id) {
+    //   const saldoOriginal = user.saldo + valorMovimiento;
+    //   if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
+    //     setErrores(['Saldo insuficiente']);
+    //   } else {
+    //     const newBalance = saldoOriginal - dataValid.balance;
+    //     updateProfile(user.id, { saldo: newBalance });
+    //     updateMovimiento(params.id, dataValid);
+    //     // navigate('/dashboard');
+    //     setModalIsOpen(true);
+    //   }
+    // } else {
+    //   // Modo creación
+    // }
+
+    if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
+      setErrores(['Saldo insuficiente']);
     } else {
-      // Modo creación
-      if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
-        setErrores(['Saldo insuficiente']);
-      } else {
-        const newBalance = user.saldo - dataValid.balance;
-        updateProfile(user.id, { saldo: newBalance });
-        createMovimiento(dataValid);
+      const newBalance = user.saldo - dataValid.balance;
+      const saltoTotal = user.saldo;
+      setdatosParaModal({ newBalance, dataValid, saltoTotal});
+      setModalIsOpen(true);
+    }
+  });
+
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      if (!params.id) {
+        updateProfile(user.id, { saldo: datosParaModal.newBalance });
+        createMovimiento(datosParaModal.dataValid);
         navigate('/dashboard');
       }
     }
-  });
+    setModalIsOpen(false);
+  };
 
   return (
     <>
       <Navbar></Navbar>
-
+      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
       <div className="movimientosFormPage-Container">
         <h2 className="movimientosFormPage-h2">Saldo disponible: <span className="verde">$ </span><span className="agregarSaldoIngresoTitulo">{saldoConPuntos}</span></h2>
         {
@@ -120,8 +136,8 @@ function MovimientosFormPage() {
           }
           <button className="movimientosFormPage-Form-button movimientosFormPage-Form-button-guardar">Guardar</button>
         </form>
-          <button 
-          onClick={()=>{navigate('/dashboard')}}
+        <button
+          onClick={() => { navigate('/dashboard') }}
           className="movimientosFormPage-Form-button movimientosFormPage-Form-button-cancelar">Cancelar</button>
       </div>
     </>
