@@ -1,21 +1,36 @@
 import { useForm } from "react-hook-form";
-import { useBalance } from "../context/BalanceContext.jsx";
+import { useBalance } from "../../context/BalanceContext.jsx";
 // El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext.jsx";
-import Navbar from "../components/navbar/Navbar.jsx"
+import { useAuth } from "../../context/AuthContext.jsx";
+import Navbar from "../../components/navbar/Navbar.jsx";
+import Modal from "../../components/Modal/Modal.jsx";
 
-function AgregarIngresosPage() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { createMovimiento } = useBalance();
+function MovimientosFormPage() {
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+  const { createMovimiento, getMovimiento, updateMovimiento } = useBalance();
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
+  const params = useParams();
+  const [valorMovimiento, setValorMovimiento] = useState(0);
   const [errores, setErrores] = useState([]);
   const [saldoConPuntos, setSaldoConPuntos] = useState(0);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [datosParaModal, setdatosParaModal] = useState([]);
 
   useEffect(() => {
-    getProfile();
+    async function loadMovimiento() {
+      getProfile();
+      if (params.id) {
+        const movimiento = await getMovimiento(params.id);
+        setValue('title', movimiento.title);
+        setValue('description', movimiento.description);
+        setValue('balance', movimiento.balance);
+        setValorMovimiento(movimiento.balance);
+      }
+    }
+    loadMovimiento();
   }, []);
 
   useEffect(() => {
@@ -36,24 +51,51 @@ function AgregarIngresosPage() {
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
-      title: 'Ingreso',
+      title: 'Gasto',
       balance: Math.abs(parseFloat(data.balance)),
     };
 
-    if (dataValid.balance === 0) {
-      setErrores(['Introdusca un saldo mayor a 0']);
+    // // Modo edición // PARA ADMIN
+    // if (params.id) {
+    //   const saldoOriginal = user.saldo + valorMovimiento;
+    //   if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
+    //     setErrores(['Saldo insuficiente']);
+    //   } else {
+    //     const newBalance = saldoOriginal - dataValid.balance;
+    //     updateProfile(user.id, { saldo: newBalance });
+    //     updateMovimiento(params.id, dataValid);
+    //     // navigate('/dashboard');
+    //     setModalIsOpen(true);
+    //   }
+    // } else {
+    //   // Modo creación
+    // }
+
+    if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
+      setErrores(['Saldo insuficiente']);
     } else {
-      const nuevoSaldo = user.saldo + dataValid.balance;
-      updateProfile(user.id, { saldo: nuevoSaldo });
-      createMovimiento(dataValid);
-      navigate('/dashboard');
+      const newBalance = user.saldo - dataValid.balance;
+      const saltoTotal = user.saldo;
+      setdatosParaModal({ newBalance, dataValid, saltoTotal});
+      setModalIsOpen(true);
     }
   });
+
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      if (!params.id) {
+        updateProfile(user.id, { saldo: datosParaModal.newBalance });
+        createMovimiento(datosParaModal.dataValid);
+        navigate('/dashboard');
+      }
+    }
+    setModalIsOpen(false);
+  };
 
   return (
     <>
       <Navbar></Navbar>
-
+      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
       <div className="movimientosFormPage-Container">
         <h2 className="movimientosFormPage-h2">Saldo disponible: <span className="verde">$ </span><span className="agregarSaldoIngresoTitulo">{saldoConPuntos}</span></h2>
         {
@@ -79,10 +121,10 @@ function AgregarIngresosPage() {
             )
           }
 
-          <label className="movimientosFormPage-label" htmlFor="description">Ingrese un titulo para el ingreso.</label>
+          <label className="movimientosFormPage-label" htmlFor="description">Ingrese un titulo para el gasto.</label>
           <textarea
             rows="3"
-            placeholder="Cobro de sueldo"
+            placeholder="Compra de bicicleta"
             name="description"
             {...register('description', { required: true })}
             className="movimientosFormPage-Form-input descripcionFormInput"
@@ -101,4 +143,5 @@ function AgregarIngresosPage() {
     </>
   )
 }
-export default AgregarIngresosPage;
+
+export default MovimientosFormPage;

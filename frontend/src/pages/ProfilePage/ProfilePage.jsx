@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useBalance } from "../context/BalanceContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
+import { useBalance } from "../../context/BalanceContext.jsx";
 import { Link, useNavigate } from "react-router-dom"
 
 function ProfilePage() {

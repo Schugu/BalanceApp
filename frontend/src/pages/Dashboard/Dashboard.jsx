@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useBalance } from "../context/BalanceContext.jsx";
-import Navbar from "../components/navbar/Navbar.jsx";
-import MovimientoCard from '../components/movimientoCard/MovimientoCard.jsx';
-import { useAuth } from "../context/AuthContext.jsx";
+import { useBalance } from "../../context/BalanceContext.jsx";
+import Navbar from "../../components/navbar/Navbar.jsx";
+import MovimientoCard from '../../components/movimientoCard/MovimientoCard.jsx';
+import { useAuth } from "../../context/AuthContext.jsx";
 import { Link } from "react-router-dom"
 
 function Dashboard() {

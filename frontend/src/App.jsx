@@ -6,13 +6,13 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { BalanceProvider } from "./context/BalanceContext.jsx";
 
 // Páginas
-import HomePage from "./pages/HomePage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
-import RegisterPage from "./pages/RegisterPage.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import AgregarGastosPage from "./pages/AgregarGastosPage.jsx";
-import AgregarIngresosPage from "./pages/AgregarIngresosPage.jsx";
-import ProfilePage from "./pages/ProfilePage.jsx";
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import LoginPage from "./pages/LoginPage/LoginPage.jsx";
+import RegisterPage from "./pages/RegisterPage/RegisterPage.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import AgregarGastosPage from "./pages/AgregarGastosPage/AgregarGastosPage.jsx";
+import AgregarIngresosPage from "./pages/AgregarIngresosPage/AgregarIngresosPage.jsx";
+import ProfilePage from "./pages/ProfilePage/ProfilePage.jsx";
 
 import ProtectedRoute from "./ProtectedRoute.jsx";
 
@@ -30,7 +30,7 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path='/dashboard' element={<Dashboard />} />
               <Route path='/add-movimiento' element={<AgregarGastosPage />} />
-              <Route path='/balance/:id' element={<AgregarGastosPage />} />
+              {/* <Route path='/balance/:id' element={<AgregarGastosPage />} /> */}
               <Route path='/add-ingresos' element={<AgregarIngresosPage />} />
               <Route path='/profile' element={<ProfilePage />} />
             </Route>
