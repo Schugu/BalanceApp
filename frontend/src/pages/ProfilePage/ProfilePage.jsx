@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { useBalance } from "../../context/BalanceContext.jsx";
 import { Link, useNavigate } from "react-router-dom"
+import ChangeTheme from "./ChangeTheme.jsx";
 
 function ProfilePage() {
   const [saldoConPuntos, setSaldoConPuntos] = useState(0);
@@ -77,10 +78,12 @@ function ProfilePage() {
       <article className="pageProfile-2">
 
         <div className="pageProfile-titlteAndImage">
-          <section className="pageProfile-buttonBack-container">
+          <section className="pageProfile-buttonBack-container justify-between">
             <button className="pageProfile-buttonBack" onClick={() => { navigate('/dashboard') }}>
               <img src="./icons/backArrow.svg" alt="" />
             </button>
+
+            <ChangeTheme />
           </section>
 
           <input
