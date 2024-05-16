@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext";
-import './Navbar.css'
 import { useEffect } from "react";
 
 function Navbar() {
@@ -11,7 +10,7 @@ function Navbar() {
   }, [isAuthenticated])
 
   return (
-    <section className="flex flex-col gap-5 p-2 bg-L-B-S text-L-T-S dark:bg-D-B-P dark:text-D-T-P border-b-2 border-solid border-L-D-P">
+    <section className="flex flex-col gap-5 p-2 bg-L-B-S text-L-T-S dark:bg-D-B-P-dark dark:text-D-T-P border-b-2 border-solid border-L-D-P">
       <div className="flex flex-wrap gap-2 justify-around items-center text-3xl">
         <Link to='/' className="hover:text-L-D-P dark:hover:text-L-D-P-light">Home</Link>
 
