@@ -4,7 +4,7 @@ import './Navbar.css'
 import { useEffect } from "react";
 
 function Navbar() {
-  const { isAuthenticated, user, getProfile} = useAuth();
+  const { isAuthenticated, user, getProfile } = useAuth();
 
   useEffect(() => {
     getProfile();
@@ -19,44 +19,39 @@ function Navbar() {
 
       </div>
 
-      <ul className="navbar-lista">
+      <div className="flex gap-2">
+        <Link to='/'>Home</Link>
+
         {isAuthenticated ? (
           <>
-            <div className="navbar-titulo-and-profile">
-              <h2 className="navbar-titulo-and-profile-welcomeUser">
-                ¡Bienvenido <span className="naranja">{user.username}</span>!
-              </h2>
+            <Link to='/dashboard'>Dashboard</Link>
 
-              <section className='navbar-logoImg'>
-                <Link to='/profile'>
-                  <img
-                    src=
-                    {
-                      user.profilePhoto && user.profilePhoto.urlImage
-                        ? user.profilePhoto.urlImage
-                        : "CarpinchoPlatudo.jpg"
-                    }
-                    alt="fotoDePerfil"
-                  />
-                </Link>
-              </section>
-            </div>
+            <section className='navbar-logoImg'>
+              <Link to='/profile'>
+                <img
+                  src=
+                  {
+                    user.profilePhoto && user.profilePhoto.urlImage
+                      ? user.profilePhoto.urlImage
+                      : "CarpinchoPlatudo.jpg"
+                  }
+                  alt="fotoDePerfil"
+                />
+              </Link>
+            </section>
           </>
         ) : (
           <>
-            <li>
-              <Link to='/login' className="botonLink signIn">
-                Iniciar sesión
-              </Link>
-            </li>
-            <li>
-              <Link to='/register' className="botonLink register">
-                Registrarse
-              </Link>
-            </li>
+            <Link to='/login' className="botonLink signIn">
+              Iniciar sesión
+            </Link>
+
+            <Link to='/register' className="botonLink register">
+              Registrarse
+            </Link>
           </>
         )}
-      </ul>
+      </div>
     </nav>
   )
 }
