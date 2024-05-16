@@ -27,7 +27,7 @@ export default function LoginPage() {
           <img className="w-full h-auto object-cover object-center" src="CarpinchoPlatudo.jpg" alt="CarpinchoPlatudo" />
         </div>
 
-        <Link to='/' className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center'>Carpincho Eficiente</Link>
+        <Link to='/' className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-light'>Carpincho Eficiente</Link>
       </article>
 
       <article className='w-full flex flex-col place-items-center gap-2.5'>
@@ -74,7 +74,7 @@ export default function LoginPage() {
             }
 
             <article className='w-9/12 text-right pt-1'>
-              <a href="#" className='no-underline text-base transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Olvidaste tu contraseña?</a>
+              <a href="#" className='no-underline text-base transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P'>Olvidaste tu contraseña?</a>
             </article>
           </section>
 
@@ -82,7 +82,7 @@ export default function LoginPage() {
 
           <section className='flex items-center gap-2.5 text-center'>
             <p className="text-xl">No tienes cuenta?</p>
-            <Link to='/register' className='no-underline text-xl transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Registrarse</Link>
+            <Link to='/register' className='no-underline text-xl transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P'>Registrarse</Link>
           </section>
         </form>
 
