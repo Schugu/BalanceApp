@@ -29,7 +29,7 @@ export default function ChangeTheme() {
   return (
     <span
       onClick={handleChangeTheme}
-      className="text-3xl cursor-pointer"
+      className="text-3xl cursor-pointer select-none"
     >
       {theme === 'light' ? '☀️' : '🌙'}
     </span>
