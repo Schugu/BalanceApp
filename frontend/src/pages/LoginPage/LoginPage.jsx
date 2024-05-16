@@ -21,13 +21,13 @@ export default function LoginPage() {
 
 
   return (
-    <section className='w-full h-screen flex flex-col place-items-center text-2xl bg-L-B-P dark:bg-D-B-P text-L-T-P dark:text-D-T-P'>
+    <section className='w-full min-h-screen flex flex-col place-items-center text-2xl bg-L-B-P dark:bg-D-B-P text-L-T-P dark:text-D-T-P'>
       <article className='w-full flex flex-col items-center gap-4 p-2.5'>
         <div className='w-52 h-52	rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
           <img className="w-full h-auto object-cover object-center" src="CarpinchoPlatudo.jpg" alt="CarpinchoPlatudo" />
         </div>
 
-        <h1 className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center'>Carpincho Eficiente</h1>
+        <Link to='/' className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center'>Carpincho Eficiente</Link>
       </article>
 
       <article className='w-full flex flex-col place-items-center gap-2.5'>
@@ -81,8 +81,8 @@ export default function LoginPage() {
           <button type="submit" className='w-9/12 bg-L-D-P pt-1.5 no-underline transition-colors duration-300 ease-in-out border-b-4 border-solid border-L-D-P-dark hover:bg-L-D-P-dark hover:border-L-D-P rounded'>Acceder</button>
 
           <section className='flex items-center gap-2.5 text-center'>
-            <p>No tienes cuenta?</p>
-            <Link to='/register' className='no-underline text-base transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Registrarse</Link>
+            <p className="text-xl">No tienes cuenta?</p>
+            <Link to='/register' className='no-underline text-xl transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Registrarse</Link>
           </section>
         </form>
 
