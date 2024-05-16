@@ -1,29 +1,16 @@
-import { useEffect, useState } from "react";
+import { useTheme } from '../../context/ThemeContext.jsx';
 import Cookies from 'js-cookie';
 
 export default function ChangeTheme() {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = Cookies.get('theme');
-    if (savedTheme) {
-      return savedTheme;
-    }
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  });
-
-  useEffect(() => {
-    if (theme === 'dark') {
-      document.querySelector('html').classList.add('dark');
-    } else {
-      document.querySelector('html').classList.remove('dark');
-    }
-    Cookies.set('theme', theme, { expires: 365 });
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
 
   const handleChangeTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(prevTheme => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      document.querySelector('html').classList.toggle('dark', newTheme === 'dark');
+      Cookies.set('theme', newTheme, { expires: 365 });
+      return newTheme;
+    });
   };
 
   return (
