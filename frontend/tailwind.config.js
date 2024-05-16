@@ -7,6 +7,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      screens:{
+        's' : '480px',
+      },
       colors: {
         // Colores personalizados para el modo claro
         'L-B-P': {
