@@ -1,4 +1,3 @@
-import "./Movimientos.css";
 
 function MovimientoCard({ movimiento }) {
   return (

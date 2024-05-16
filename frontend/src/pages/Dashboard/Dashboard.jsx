@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useBalance } from "../../context/BalanceContext.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
-import MovimientoCard from '../../components/movimientoCard/MovimientoCard.jsx';
+import MovimientoCard from './MovimientoCard.jsx';
 import { useAuth } from "../../context/AuthContext.jsx";
 import { Link } from "react-router-dom"
 
