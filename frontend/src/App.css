@@ -137,41 +137,6 @@ input[type='number']::-webkit-outer-spin-button {
 
 
 
-/* HOME PAGE */
-.homePageSection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  place-content: center;
-  background-color: #e9eae2;
-}
-
-.homePageArticle {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.homePageArticleTitle {
-  border-bottom: 3px dashed #14d386;
-}
-
-.homePageArticleParagraph {
-  text-wrap: wrap;
-  text-indent: 20px;
-  line-height: 1.2;
-}
-
-@media screen and (min-width: 480px) {
-  .homePageArticle {
-    max-width: 50vh;
-  }
-}
-
-
-
-
 /* PROFILEPAGE */
 .pageProfile {
   height: 100vh;
