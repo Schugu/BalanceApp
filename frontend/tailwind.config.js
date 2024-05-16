@@ -19,10 +19,11 @@ export default {
           DEFAULT: '#374151',
           dark: '#14181d',
         },
-        'L-D-S': {
+        'L-D-P': {
           light: '#17f99e',
           DEFAULT: '#14d386',
           dark: '#0fa065',
+          hover: '#14d38722',
         },
         'L-T-P': {
           light: '#1c1e26',
@@ -46,7 +47,7 @@ export default {
           DEFAULT: '#003f2f',
           dark: '#000c08',
         },
-        'D-D-S': {
+        'D-D-P': {
           light: '#17f99e',
           DEFAULT: '#14d386',
           dark: '#0fa065',
