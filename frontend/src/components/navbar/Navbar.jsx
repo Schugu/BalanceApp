@@ -11,24 +11,18 @@ function Navbar() {
   }, [isAuthenticated])
 
   return (
-    <nav className="navbar">
-      <div className="navbar-titulo-and-profile">
-        <Link className="navbar-link" to={isAuthenticated ? '/dashboard' : '/'}>
-          <h1 className="navbar-titulo">Carpincho Eficiente</h1>
-        </Link>
-
-      </div>
-
-      <div className="flex gap-2">
-        <Link to='/'>Home</Link>
+    <section className="flex flex-col gap-5 p-2 bg-L-B-S text-L-T-S dark:bg-D-B-P dark:text-D-T-P border-b-2 border-solid border-L-D-P">
+      <div className="flex flex-wrap gap-2 justify-around items-center text-3xl">
+        <Link to='/' className="hover:text-L-D-P dark:hover:text-L-D-P-light">Home</Link>
 
         {isAuthenticated ? (
           <>
-            <Link to='/dashboard'>Dashboard</Link>
+            <Link to='/dashboard' className="hover:text-L-D-P dark:hover:text-L-D-P-light">Dashboard</Link>
 
-            <section className='navbar-logoImg'>
+            <section className='w-11 h-11 rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
               <Link to='/profile'>
                 <img
+                  className="w-full h-auto object-cover object-center"
                   src=
                   {
                     user.profilePhoto && user.profilePhoto.urlImage
@@ -42,17 +36,13 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to='/login' className="botonLink signIn">
-              Iniciar sesión
-            </Link>
-
-            <Link to='/register' className="botonLink register">
-              Registrarse
+            <Link to='/login' className="rounded-md text-center py-0.5 px-1.5 bg-indigo-500">
+              Ingresar
             </Link>
           </>
         )}
       </div>
-    </nav>
+    </section>
   )
 }
 
