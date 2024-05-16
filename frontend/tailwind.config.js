@@ -10,6 +10,9 @@ export default {
       screens:{
         's' : '480px',
       },
+      fontFamily: {
+        rubik: ['Rubik', 'sans-serif'],
+      },
       colors: {
         // Colores personalizados para el modo claro
         'L-B-P': {
