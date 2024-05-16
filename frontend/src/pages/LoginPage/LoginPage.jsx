@@ -21,68 +21,68 @@ export default function LoginPage() {
 
 
   return (
-    <section className='portada'>
-      <article className='logoAndTitulo'>
-        <div className='logoImg'>
-          <img src="CarpinchoPlatudo.jpg" alt="" />
+    <section className='w-full h-screen flex flex-col place-items-center text-2xl bg-L-B-P dark:bg-D-B-P text-L-T-P dark:text-D-T-P'>
+      <article className='w-full flex flex-col items-center gap-4 p-2.5'>
+        <div className='w-52 h-52	rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
+          <img className="w-full h-auto object-cover object-center" src="CarpinchoPlatudo.jpg" alt="CarpinchoPlatudo" />
         </div>
 
-        <h1 className='tituloPortada'>Carpincho Eficiente</h1>
+        <h1 className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center'>Carpincho Eficiente</h1>
       </article>
 
-      <article className='articleInputs'>
+      <article className='w-full flex flex-col place-items-center gap-2.5'>
         {
           signInErrors.map((error, i) => (
-            <div key={i} className="errorMessage">
+            <div key={i} className="bg-red-100 text-red-600 w-9/12 text-center p-2">
               {error}
             </div>
           ))
         }
 
-        <h3 className='inputsH2'>Inicio de sesion</h3>
+        <h3 className='w-1/2 text-center border-b-2 border-solid border-L-D-P'>Inicio de sesion</h3>
 
-        <form className='divInputs' onSubmit={onSubmit}>
-          <section className='containerInput'>
-            <h4 className='inputH4'>Correo electrónico</h4>
+        <form className='w-full flex flex-col items-center gap-3.5' onSubmit={onSubmit}>
+          <section className='w-full flex flex-col items-center'>
+            <h4 className='w-9/12 text-xl'>Correo electrónico</h4>
             <input
               type="email"
               name='email'
               {...register('email', { required: true })}
-              className='input'
+              className='w-9/12 text-base p-2.5 outline-none border-b-2 border-solid border-L-D-P bg-transparent hover:bg-L-D-P-hover rounded'
               placeholder='carpincho_eficiente@gmail.com'
             />
             {
               errors.email && (
-                <p className="errorMessage">Email is requiere</p>
+                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Email is requiere</p>
               )
             }
           </section>
 
-          <section className='containerInput'>
-            <h4 className='inputH4'>Contraseña:</h4>
+          <section className='w-full flex flex-col items-center'>
+            <h4 className='w-9/12 text-xl'>Contraseña:</h4>
             <input
               type="password"
               name='password'
               {...register('password', { required: true })}
-              className='input'
+              className='w-9/12 text-base p-2.5 outline-none border-b-2 border-solid border-L-D-P bg-transparent hover:bg-L-D-P-hover rounded'
               placeholder='*********'
             />
             {
               errors.password && (
-                <p className="errorMessage">Password is requiere</p>
+                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Password is requiere</p>
               )
             }
 
-            <article className='containerIinkForgetPassword'>
-              <a href="#" className='linkForgetPassword'>Olvidaste tu contraseña?</a>
+            <article className='w-9/12 text-right pt-1'>
+              <a href="#" className='no-underline text-base transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Olvidaste tu contraseña?</a>
             </article>
           </section>
 
-          <button type="submit" className='botonIngresar'>Acceder</button>
+          <button type="submit" className='w-9/12 bg-L-D-P pt-1.5 no-underline transition-colors duration-300 ease-in-out border-b-4 border-solid border-L-D-P-dark hover:bg-L-D-P-dark hover:border-L-D-P rounded'>Acceder</button>
 
-          <section className='containerLinkRegister'>
+          <section className='flex items-center gap-2.5 text-center'>
             <p>No tienes cuenta?</p>
-            <Link to='/register' className='linkRegister'>Registrarse</Link>
+            <Link to='/register' className='no-underline text-base transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Registrarse</Link>
           </section>
         </form>
 
