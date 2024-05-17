@@ -18,7 +18,7 @@ function Navbar() {
           <>
             <Link to='/dashboard' className="hover:text-L-D-P dark:hover:text-L-D-P-light">Dashboard</Link>
 
-            <section className='w-11 h-11 rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
+            <section className='w-11 h-11 rounded-full overflow-hidden border-2 border-solid border-L-D-P'>
               <Link to='/profile'>
                 <img
                   className="w-full h-auto object-cover object-center"
