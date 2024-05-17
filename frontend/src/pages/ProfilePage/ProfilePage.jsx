@@ -80,7 +80,7 @@ function ProfilePage() {
         <div className="pageProfile-titlteAndImage">
           <section className="pageProfile-buttonBack-container justify-between">
             <button className="pageProfile-buttonBack" onClick={() => { navigate('/dashboard') }}>
-              <img src="./icons/backArrow.svg" alt="" />
+            ⮌
             </button>
 
             <ChangeTheme />
