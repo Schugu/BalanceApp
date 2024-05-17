@@ -30,7 +30,7 @@ function Dashboard() {
         </article>
         <h1 className="font-rubik text-L-D-P-dark dark:text-D-D-P-light text-5xl font-light">$ {user && user.saldo && format(user.saldo)}</h1>
 
-        <article className="w-full flex flex-col p-1 gap-3 bg-L-B-P dark:bg-D-B-S rounded">
+        <article className="w-full flex flex-col p-1 gap-3 bg-L-B-P dark:bg-D-B-S rounded border-2 border-solid border-L-D-P-dark dark:border-none">
           {movimientos.length === 0 ? <h6 className="text-center">No hay movimientos :/</h6> : <h1 className="text-center">Movimientos</h1>}
 
 
