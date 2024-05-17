@@ -13,7 +13,7 @@ function Dashboard() {
   useEffect(() => {
     getMovimientos();
     getProfile();
-  }, [user])
+  }, [])
 
   return (
     <>

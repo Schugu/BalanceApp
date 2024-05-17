@@ -19,8 +19,8 @@ function RegisterPage() {
   });
 
   return (
-    <section className='w-full min-h-screen flex flex-col place-items-center text-2xl bg-L-B-P dark:bg-D-B-P text-L-T-P dark:text-D-T-P'>
-      <article className='w-full flex flex-col items-center gap-4 p-2.5'>
+    <section className='w-full min-h-screen p-2.5 flex flex-col gap-2 place-items-center text-2xl bg-L-B-P dark:bg-D-B-P text-L-T-P dark:text-D-T-P'>
+      <article className='w-full flex flex-col items-center gap-4'>
         <div className='w-48 h-48	rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
           <img className="w-full h-auto object-cover object-center" src="CarpinchoPlatudo.jpg" alt="CarpinchoPlatudo" />
         </div>
@@ -36,7 +36,7 @@ function RegisterPage() {
           ))
         }
 
-        <h3 className='w-1/2 text-center border-b-2 border-solid border-L-D-P'>Crear una cuenta</h3>
+        <h3 className='text-center border-b-2 border-solid border-L-D-P'>Crear una cuenta</h3>
 
         <form className='w-full flex flex-col items-center gap-3.5' onSubmit={onSubmit}>
         <section className='w-full flex flex-col items-center'>
@@ -89,7 +89,7 @@ function RegisterPage() {
 
           <button type="submit" className='w-9/12 bg-L-D-P pt-1.5 no-underline transition-colors duration-300 ease-in-out border-b-4 border-solid border-L-D-P-dark hover:bg-L-D-P-dark hover:border-L-D-P rounded'>Registrarse</button>
 
-          <section className='flex items-center gap-2.5 text-center'>
+          <section className='flex flex-wrap justify-center items-center gap-2.5 text-center'>
             <p className="text-xl">¿Ya tienes una cuenta?</p>
             <Link to='/login' className='no-underline text-xl transition-colors duration-300 ease-in-out hover:text-L-D-P-dark dark:hover:text-L-D-P-dark'>Inicia Sesión</Link>
           </section>

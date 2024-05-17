@@ -16,7 +16,7 @@ function ProfilePage() {
   useEffect(() => {
     getMovimientos();
     getProfile();
-  }, [user])
+  }, [])
 
   useEffect(() => {
     const totalIngresos = movimientos.reduce((total, movimiento) => {
