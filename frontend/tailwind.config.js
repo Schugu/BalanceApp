@@ -44,7 +44,7 @@ export default {
 
         // Colores personalizados para el modo oscuro
         'D-B-P': {
-          light: '003345',
+          light: '#003345',
           DEFAULT: '#00171f',
           dark: '#000000',
         },
