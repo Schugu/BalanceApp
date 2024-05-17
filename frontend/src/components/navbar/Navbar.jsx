@@ -35,7 +35,7 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to='/login' className="rounded-md text-center py-0.5 px-1.5 bg-indigo-500">
+            <Link to='/login' className="rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">
               Ingresar
             </Link>
           </>

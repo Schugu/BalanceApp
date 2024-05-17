@@ -115,7 +115,7 @@ function ProfilePage() {
           <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Gastos totales: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{egresosTotales}</span></h3>
         </div>
 
-        <Link className="p-1.5 rounded text-center bg-red-500 text-L-T-S" to='/' onClick={() => { logout() }}>
+        <Link className="py-0.5 px-3 rounded text-center bg-red-500 text-L-T-S" to='/' onClick={() => { logout() }}>
           Cerrar Sesión
         </Link>
       </article>
