@@ -24,7 +24,7 @@ function Dashboard() {
           <Link className="p-1.5 rounded text-center bg-green-400" to='/add-movimiento'>
             Añadir gastos
           </Link>
-          <Link className="p-1.5 rounded text-center bg-red-400" to='/add-ingresos'>
+          <Link className="p-1.5 rounded text-center bg-red-500" to='/add-ingresos'>
             Añadir ingresos
           </Link>
         </article>

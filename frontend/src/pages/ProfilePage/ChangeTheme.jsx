@@ -16,7 +16,7 @@ export default function ChangeTheme() {
   return (
     <span
       onClick={handleChangeTheme}
-      className="text-3xl cursor-pointer select-none"
+      className="cursor-pointer select-none text-3xl border-2 border-solid border-transparent hover:border-L-D-P rounded-full px-1 py-1.5 hover:bg-L-D-P hover:bg-opacity-15"
     >
       {theme === 'light' ? '☀️' : '🌙'}
     </span>
