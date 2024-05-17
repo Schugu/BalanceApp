@@ -1,12 +1,14 @@
+import format from "../../helpers/format.js";
+
 
 function MovimientoCard({ movimiento }) {
   return (
-    <div className={`movimiento ${movimiento.title === 'Gasto' ? 'movGasto' : 'movIngreso'}`}>
-      <header className="movimientoHeader">
-        <h1 className="movimientoTitulo">{movimiento.title}</h1>
-      </header>
-      <p className="movimientoDescripcion">{movimiento.description}</p>
-      <p>{movimiento.balance}</p>
+    <div className='flex flex-wrap justify-between p-2 rounded dark:bg-D-B-S-light text-xl'>
+      <p className="">{movimiento.description}</p>
+      <p className={`${movimiento.title === 'Gasto' ? 'text-red-500' : 'text-L-D-P'}`}>
+        ${format(movimiento.balance)} {' '}
+        {movimiento.title === 'Gasto' ? '🡣' : '🡩'}
+        </p>
     </div>
   )
 }
