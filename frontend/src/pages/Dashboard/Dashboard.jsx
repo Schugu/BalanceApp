@@ -1,25 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useBalance } from "../../context/BalanceContext.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import MovimientoCard from './MovimientoCard.jsx';
 import { useAuth } from "../../context/AuthContext.jsx";
 import { Link } from "react-router-dom"
+import format from "../../helpers/format.js";
 
 function Dashboard() {
   const { getMovimientos, movimientos } = useBalance();
   const { user, getProfile } = useAuth();
-  const [saldoConPuntos, setSaldoConPuntos] = useState(0);
 
   useEffect(() => {
     getMovimientos();
     getProfile();
-  }, [])
-
-  useEffect(() => {
-    if (user && user.saldo) {
-      setSaldoConPuntos(user.saldo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-    }
-  }, [user, user.saldo]);
+  }, [user])
 
   return (
     <>
@@ -34,7 +28,7 @@ function Dashboard() {
             Añadir ingresos
           </Link>
         </article>
-        <h1 className="font-rubik text-L-D-P-dark dark:text-D-D-P-light text-5xl font-light">$ {saldoConPuntos}</h1>
+        <h1 className="font-rubik text-L-D-P-dark dark:text-D-D-P-light text-5xl font-light">$ {user && user.saldo && format(user.saldo)}</h1>
 
         <article className="w-full flex flex-col p-1 gap-3 bg-L-B-P dark:bg-D-B-S rounded">
           {movimientos.length === 0 ? <h6 className="text-center">No hay movimientos :/</h6> : <h1 className="text-center">Movimientos</h1>}
