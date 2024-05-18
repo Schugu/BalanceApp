@@ -22,7 +22,7 @@ function Dashboard() {
       <section className="min-h-scren flex flex-col items-center gap-5 p-2.5 bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P">
         <article className="w-full flex flex-wrap justify-around gap-2.5 px-2.5 pb-2.5 border-b-2 border-solid border-L-D-P-dark dark:border-D-D-P">
           <Link to='/add-movimiento'>
-            <p className="text-white rounded-full text-center py-0.5 px-3 bg-red-900 text-base hover:bg-opacity-75">Añadir ingreso</p>
+            <p className="text-white rounded-full text-center py-0.5 px-3 bg-red-900 text-base hover:bg-opacity-75">Añadir gasto</p>
           </Link>
           <Link to='/add-ingresos'>
             <p className="text-white rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">Añadir ingreso</p>
