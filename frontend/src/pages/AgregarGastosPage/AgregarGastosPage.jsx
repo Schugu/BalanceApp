@@ -1,36 +1,24 @@
 import { useForm } from "react-hook-form";
 import { useBalance } from "../../context/BalanceContext.jsx";
-// El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import Modal from "../../components/Modal/Modal.jsx";
+import format from "../../helpers/format.js";
 
 function MovimientosFormPage() {
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
-  const { createMovimiento, getMovimiento, updateMovimiento } = useBalance();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { createMovimiento } = useBalance();
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const params = useParams();
-  const [valorMovimiento, setValorMovimiento] = useState(0);
   const [errores, setErrores] = useState([]);
-  const [saldoConPuntos, setSaldoConPuntos] = useState(0);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [datosParaModal, setdatosParaModal] = useState([]);
 
   useEffect(() => {
-    async function loadMovimiento() {
-      getProfile();
-      if (params.id) {
-        const movimiento = await getMovimiento(params.id);
-        setValue('title', movimiento.title);
-        setValue('description', movimiento.description);
-        setValue('balance', movimiento.balance);
-        setValorMovimiento(movimiento.balance);
-      }
-    }
-    loadMovimiento();
+    getProfile();
   }, []);
 
   useEffect(() => {
@@ -42,11 +30,6 @@ function MovimientosFormPage() {
     }
   }, [errores]);
 
-  useEffect(() => {
-    if (user && user.saldo) {
-      setSaldoConPuntos(user.saldo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-    }
-  }, [user, user.saldo]);
 
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
@@ -55,28 +38,12 @@ function MovimientosFormPage() {
       balance: Math.abs(parseFloat(data.balance)),
     };
 
-    // // Modo edición // PARA ADMIN
-    // if (params.id) {
-    //   const saldoOriginal = user.saldo + valorMovimiento;
-    //   if (dataValid.balance === 0 || dataValid.balance > saldoOriginal) {
-    //     setErrores(['Saldo insuficiente']);
-    //   } else {
-    //     const newBalance = saldoOriginal - dataValid.balance;
-    //     updateProfile(user.id, { saldo: newBalance });
-    //     updateMovimiento(params.id, dataValid);
-    //     // navigate('/dashboard');
-    //     setModalIsOpen(true);
-    //   }
-    // } else {
-    //   // Modo creación
-    // }
-
     if (dataValid.balance === 0 || dataValid.balance > user.saldo) {
       setErrores(['Saldo insuficiente']);
     } else {
       const newBalance = user.saldo - dataValid.balance;
       const saltoTotal = user.saldo;
-      setdatosParaModal({ newBalance, dataValid, saltoTotal});
+      setdatosParaModal({ newBalance, dataValid, saltoTotal });
       setModalIsOpen(true);
     }
   });
@@ -95,50 +62,58 @@ function MovimientosFormPage() {
   return (
     <>
       <Navbar></Navbar>
+
       {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
-      <div className="movimientosFormPage-Container">
-        <h2 className="movimientosFormPage-h2">Saldo disponible: <span className="verde">$ </span><span className="agregarSaldoIngresoTitulo">{saldoConPuntos}</span></h2>
+
+      <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5">
         {
           errores.map((error, i) => (
-            <div key={i} className="errorMessage">
+            <div key={i} className="bg-red-100 text-red-600 w-9/12 text-center p-2">
               {error}
             </div>
           ))
         }
-        <form onSubmit={onSubmit} className="movimientosFormPage-Form">
-          <label className="movimientosFormPage-label" htmlFor="number">Ingrese un monto.</label>
-          <input type="number"
-            step="0.01"
-            name="balance"
-            {...register('balance', { required: true })}
-            className="movimientosFormPage-Form-input valorSaldo"
-            placeholder="$"
-            autoComplete="off"
-          />
-          {
-            errors.balance && (
-              <p className="errorMessage">Balance is requiere</p>
-            )
-          }
+        <form onSubmit={onSubmit} className="flex flex-col items-center gap-2.5">
+          <section className="w-full flex flex-col items-center gap-0.5">
+            <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
+            <input type="number"
+              step="0.01"
+              name="balance"
+              {...register('balance', { required: true })}
+              className="w-full p-4 bg-L-B-S rounded-lg placeholder:text-L-D-P outline-L-D-P text-white text-3xl"
+              placeholder="$"
+              autoComplete="off"
+            />
+            {
+              errors.balance && (
+                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2">Balance is requiere</p>
+              )
+            }
+            <h2 className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></h2>
+          </section>
 
-          <label className="movimientosFormPage-label" htmlFor="description">Ingrese un titulo para el gasto.</label>
-          <textarea
-            rows="3"
-            placeholder="Compra de bicicleta"
-            name="description"
-            {...register('description', { required: true })}
-            className="movimientosFormPage-Form-input descripcionFormInput"
-          ></textarea>
-          {
-            errors.description && (
-              <p className="errorMessage">Description is requiere</p>
-            )
-          }
-          <button className="movimientosFormPage-Form-button movimientosFormPage-Form-button-guardar">Guardar</button>
+
+          <section className="w-full flex flex-col items-center gap-0.5">
+            <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el gasto.</label>
+            <textarea
+              rows="3"
+              placeholder="Compra de bicicleta"
+              name="description"
+              {...register('description', { required: true })}
+              className="w-full p-4 bg-L-B-S rounded-lg placeholder:text-L-D-P outline-L-D-P text-white resize-none text-2xl"
+            ></textarea>
+            {
+              errors.description && (
+                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2">Description is requiere</p>
+              )
+            }
+          </section>
+
+          <button className="w-full p-2 bg-L-D-P">Guardar</button>
         </form>
         <button
           onClick={() => { navigate('/dashboard') }}
-          className="movimientosFormPage-Form-button movimientosFormPage-Form-button-cancelar">Cancelar</button>
+          className="w-full p-2 bg-red-500">Cancelar</button>
       </div>
     </>
   )
