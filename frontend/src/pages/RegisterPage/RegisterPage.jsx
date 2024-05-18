@@ -24,19 +24,19 @@ function RegisterPage() {
         <div className='w-48 h-48	rounded-full overflow-hidden border-4 border-solid border-L-D-P'>
           <img className="w-full h-auto object-cover object-center" src="CarpinchoPlatudo.jpg" alt="CarpinchoPlatudo" />
         </div>
-        <Link to='/' className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center'>Carpincho Eficiente</Link>
+        <Link to='/' className='pb-1.5 border-b-2 border-L-D-P w-4/5 text-center transition-colors duration-300 ease-in-out hover:text-L-D-P-light'>Carpincho Eficiente</Link>
       </article>
 
       <article className='w-full flex flex-col place-items-center gap-2.5'>
         {
           registerErrors.map((error, i) => (
-            <div key={i} className="bg-red-100 text-red-600 w-9/12 text-center p-2">
+            <div key={i} className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded">
               {error}
             </div>
           ))
         }
 
-        <h3 className='text-center border-b-2 border-solid border-L-D-P'>Crear una cuenta</h3>
+        <h3 className='px-2 text-center border-b-2 border-solid border-L-D-P'>Crear una cuenta</h3>
 
         <form className='w-full flex flex-col items-center gap-3.5' onSubmit={onSubmit}>
         <section className='w-full flex flex-col items-center'>
@@ -50,7 +50,7 @@ function RegisterPage() {
             />
             {
               errors.username && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Username is requiere</p>
+                <p className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded rounded">Username is requiere</p>
               )
             }
           </section>
@@ -66,7 +66,7 @@ function RegisterPage() {
             />
             {
               errors.email && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Email is requiere</p>
+                <p className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded rounded">Email is requiere</p>
               )
             }
           </section>
@@ -82,7 +82,7 @@ function RegisterPage() {
             />
             {
               errors.password && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Password is requiere</p>
+                <p className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded rounded">Password is requiere</p>
               )
             }
           </section>

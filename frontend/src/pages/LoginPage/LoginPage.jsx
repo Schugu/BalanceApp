@@ -33,13 +33,13 @@ export default function LoginPage() {
       <article className='w-full flex flex-col place-items-center gap-2.5'>
         {
           signInErrors.map((error, i) => (
-            <div key={i} className="bg-red-100 text-red-600 w-9/12 text-center p-2">
+            <div key={i} className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded">
               {error}
             </div>
           ))
         }
 
-        <h3 className='w-1/2 text-center border-b-2 border-solid border-L-D-P'>Inicio de sesion</h3>
+        <h3 className='px-2 text-center border-b-2 border-solid border-L-D-P'>Inicio de sesion</h3>
 
         <form className='w-full flex flex-col items-center gap-3.5' onSubmit={onSubmit}>
           <section className='w-full flex flex-col items-center'>
@@ -53,7 +53,7 @@ export default function LoginPage() {
             />
             {
               errors.email && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Email is requiere</p>
+                <p className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded">Email is requiere</p>
               )
             }
           </section>
@@ -69,7 +69,7 @@ export default function LoginPage() {
             />
             {
               errors.password && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2 rounded">Password is requiere</p>
+                <p className="w-9/12 bg-red-100 text-red-600 text-center p-1 rounded rounded">Password is requiere</p>
               )
             }
 

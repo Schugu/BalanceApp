@@ -67,7 +67,7 @@ function MovimientosFormPage() {
       <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
           errores.map((error, i) => (
-            <div key={i} className="bbg-red-100 text-red-600 w-full text-center p-1 rounded">
+            <div key={i} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">
               {error}
             </div>
           ))

@@ -82,7 +82,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, userFound.password);
 
     // Si la contraseña no coincide lanzar un mensaje de error
-    if (!isMatch) return res.status(400).json({ message: 'Incorrecto Password' });
+    if (!isMatch) return res.status(400).json({ message: 'Incorrect Password' });
 
     // Crear y guardar el token en una const 
     const token = await createAccessToken({ id: userFound._id });
