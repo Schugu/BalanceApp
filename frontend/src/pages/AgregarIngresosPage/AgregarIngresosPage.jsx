@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useBalance } from "../../context/BalanceContext.jsx";
-// El useParams sirve para que podamos obtener un objeto con los datos dinamicos que van en la URL.
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx"
+import format from "../../helpers/format.js";
 
 function AgregarIngresosPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,7 +12,6 @@ function AgregarIngresosPage() {
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
   const [errores, setErrores] = useState([]);
-  const [saldoConPuntos, setSaldoConPuntos] = useState(0);
 
   useEffect(() => {
     getProfile();
@@ -26,12 +25,6 @@ function AgregarIngresosPage() {
       return () => clearTimeout(timer);
     }
   }, [errores]);
-
-  useEffect(() => {
-    if (user && user.saldo) {
-      setSaldoConPuntos(user.saldo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
-    }
-  }, [user, user.saldo]);
 
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
@@ -54,8 +47,7 @@ function AgregarIngresosPage() {
     <>
       <Navbar></Navbar>
 
-      <div className="movimientosFormPage-Container">
-        <h2 className="movimientosFormPage-h2">Saldo disponible: <span className="verde">$ </span><span className="agregarSaldoIngresoTitulo">{saldoConPuntos}</span></h2>
+      <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
           errores.map((error, i) => (
             <div key={i} className="errorMessage">
@@ -63,40 +55,46 @@ function AgregarIngresosPage() {
             </div>
           ))
         }
-        <form onSubmit={onSubmit} className="movimientosFormPage-Form">
-          <label className="movimientosFormPage-label" htmlFor="number">Ingrese un monto.</label>
-          <input type="number"
-            step="0.01"
-            name="balance"
-            {...register('balance', { required: true })}
-            className="movimientosFormPage-Form-input valorSaldo"
-            placeholder="$"
-            autoComplete="off"
-          />
-          {
-            errors.balance && (
-              <p className="errorMessage">Balance is requiere</p>
-            )
-          }
+        <form onSubmit={onSubmit} className="flex flex-col items-center gap-6">
+          <section className="w-full flex flex-col items-center gap-1.5">
+            <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
+            <input type="number"
+              step="0.01"
+              name="balance"
+              {...register('balance', { required: true })}
+              className="w-full p-4 bg-L-B-S rounded-lg placeholder:text-L-D-P focus:outline-none focus:ring-2 focus:ring-L-D-P text-white text-3xl"
+              placeholder="$"
+              autoComplete="off"
+            />
+            {
+              errors.balance && (
+                <p className="errorMessage">Balance is requiere</p>
+              )
+            }
+            <h2 className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></h2>
+          </section>
 
-          <label className="movimientosFormPage-label" htmlFor="description">Ingrese un titulo para el ingreso.</label>
-          <textarea
-            rows="3"
-            placeholder="Cobro de sueldo"
-            name="description"
-            {...register('description', { required: true })}
-            className="movimientosFormPage-Form-input descripcionFormInput"
-          ></textarea>
-          {
-            errors.description && (
-              <p className="errorMessage">Description is requiere</p>
-            )
-          }
-          <button className="movimientosFormPage-Form-button movimientosFormPage-Form-button-guardar">Guardar</button>
+          <section className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
+          <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el Ingreso.</label>
+            <textarea
+              rows="3"
+              placeholder="Cobro de sueldo"
+              name="description"
+              {...register('description', { required: true })}
+              className="w-full p-4 bg-L-B-S rounded-lg placeholder:text-L-D-P focus:outline-none focus:ring-2 focus:ring-L-D-P text-white resize-none text-2xl"
+            ></textarea>
+            {
+              errors.description && (
+                <p className="errorMessage">Description is requiere</p>
+              )
+            }
+          </section>
+
+          <button className="w-full p-2 bg-L-D-P rounded-lg">Guardar</button>
         </form>
         <button
           onClick={() => { navigate('/dashboard') }}
-          className="movimientosFormPage-Form-button movimientosFormPage-Form-button-cancelar">Cancelar</button>
+          className="w-full p-2 bg-red-500 rounded-lg">Cancelar</button>
       </div>
     </>
   )
