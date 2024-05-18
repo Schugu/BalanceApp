@@ -68,7 +68,7 @@ function MovimientosFormPage() {
       <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
           errores.map((error, i) => (
-            <div key={i} className="bg-red-100 text-red-600 w-9/12 text-center p-2">
+            <div key={i} className="bbg-red-100 text-red-600 w-full text-center p-1 rounded">
               {error}
             </div>
           ))
@@ -86,7 +86,7 @@ function MovimientosFormPage() {
             />
             {
               errors.balance && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2">Balance is requiere</p>
+                <p className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is requiere</p>
               )
             }
             <h2 className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></h2>
@@ -104,7 +104,7 @@ function MovimientosFormPage() {
             ></textarea>
             {
               errors.description && (
-                <p className="bg-red-100 text-red-600 w-9/12 text-center p-2">Description is requiere</p>
+                <p className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is requiere</p>
               )
             }
           </section>
