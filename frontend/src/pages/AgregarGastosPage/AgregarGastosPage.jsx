@@ -30,7 +30,6 @@ function MovimientosFormPage() {
     }
   }, [errores]);
 
-
   const onSubmit = handleSubmit((data) => {
     const dataValid = {
       ...data,
@@ -42,8 +41,8 @@ function MovimientosFormPage() {
       setErrores(['Saldo insuficiente']);
     } else {
       const newBalance = user.saldo - dataValid.balance;
-      const saltoTotal = user.saldo;
-      setdatosParaModal({ newBalance, dataValid, saltoTotal });
+      const saldoTotal = user.saldo;
+      setdatosParaModal({ newBalance, dataValid, saldoTotal });
       setModalIsOpen(true);
     }
   });
@@ -73,7 +72,7 @@ function MovimientosFormPage() {
             </div>
           ))
         }
-        <form onSubmit={onSubmit} className="flex flex-col items-center gap-6">
+        <form onSubmit={onSubmit} className="w-full flex flex-col items-center gap-6">
           <section className="w-full flex flex-col items-center gap-1.5">
             <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
             <input type="number"
