@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { useBalance } from "../../context/BalanceContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
-import Navbar from "../../components/navbar/Navbar.jsx"
+import Navbar from "../../components/navbar/Navbar.jsx";
+import Modal from "../../components/Modal/Modal.jsx";
 import format from "../../helpers/format.js";
 
 function AgregarIngresosPage() {
@@ -11,7 +12,10 @@ function AgregarIngresosPage() {
   const { createMovimiento } = useBalance();
   const { user, updateProfile, getProfile } = useAuth();
   const navigate = useNavigate();
+  const params = useParams();
   const [errores, setErrores] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [datosParaModal, setdatosParaModal] = useState([]);
 
   useEffect(() => {
     getProfile();
@@ -36,16 +40,29 @@ function AgregarIngresosPage() {
     if (dataValid.balance === 0) {
       setErrores(['Introdusca un saldo mayor a 0']);
     } else {
-      const nuevoSaldo = user.saldo + dataValid.balance;
-      updateProfile(user.id, { saldo: nuevoSaldo });
-      createMovimiento(dataValid);
-      navigate('/dashboard');
+      const newBalance = user.saldo + dataValid.balance;
+      const saldoTotal = user.saldo;
+      setdatosParaModal({ newBalance, dataValid, saldoTotal });
+      setModalIsOpen(true);
     }
   });
+
+  const handleConfirmation = (confirmed) => {
+    if (confirmed) {
+      if (!params.id) {
+        updateProfile(user.id, { saldo: datosParaModal.newBalance });
+        createMovimiento(datosParaModal.dataValid);
+        navigate('/dashboard');
+      }
+    }
+    setModalIsOpen(false);
+  };
 
   return (
     <>
       <Navbar></Navbar>
+
+      {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
 
       <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
@@ -55,7 +72,7 @@ function AgregarIngresosPage() {
             </div>
           ))
         }
-        <form onSubmit={onSubmit} className="flex flex-col items-center gap-6">
+        <form onSubmit={onSubmit} className="w-full flex flex-col items-center gap-6">
           <section className="w-full flex flex-col items-center gap-1.5">
             <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
             <input type="number"
@@ -75,7 +92,7 @@ function AgregarIngresosPage() {
           </section>
 
           <section className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
-          <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el Ingreso.</label>
+            <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el Ingreso.</label>
             <textarea
               rows="3"
               placeholder="Cobro de sueldo"
