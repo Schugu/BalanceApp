@@ -17,11 +17,11 @@ function MovimientoCard({ movimiento }) {
   return (
     <section className="flex flex-col items-center w-full">
       <div onClick={handleClick}
-        className={`w-full flex flex-wrap justify-between p-2 dark:bg-D-B-S-light text-xl border-2 border-solid border-D-B-S dark:border-none cursor-pointer
+        className={`w-full flex flex-wrap justify-between p-2 dark:bg-D-B-S-light text-xl border-2 border-solid border-D-B-S cursor-pointer hover:bg-L-B-P-dark hover:dark:border-white dark:border-transparent
         ${estadoAcordeon === 'cerrado' ? 'rounded' : 'rounded-t'}`}>
 
         <p className="">{movimiento.description}</p>
-        <p className={`${movimiento.title === 'Gasto' ? 'text-red-500' : 'text-L-D-P'}`}>
+        <p className={`${movimiento.title === 'Gasto' ? 'text-red-500 dark:text-red-400' : 'text-L-D-P-dark dark:text-D-D-P'}`}>
           ${format(movimiento.balance)} {' '}
           {movimiento.title === 'Gasto' ? '🡣' : '🡩'}
         </p>

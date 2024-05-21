@@ -82,7 +82,7 @@ function ProfilePage() {
               onChange={handleFileChange}
               ref={fileInputRef}
             />
-            <article className='w-40 h-40 rounded-full overflow-hidden border-4 border-solid border-L-D-P '
+            <article className='w-40 h-40 rounded-full overflow-hidden border-4 border-solid border-L-D-P cursor-pointer'
               onClick={handleProfileClick}
             >
               <img
