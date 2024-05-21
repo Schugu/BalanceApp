@@ -22,26 +22,26 @@ function Dashboard() {
 
       <section className="lg:w-4/6 w-full min-h-screen flex flex-col items-center gap-5 p-2.5">
         <article className="w-full flex flex-wrap justify-around gap-2.5 px-2.5 pb-2.5 border-b-2 border-solid border-L-D-P-dark dark:border-D-D-P">
-          <Link to='/add-movimiento'>
-            <p className="text-white rounded-full text-center py-0.5 px-3 bg-red-900 text-base hover:bg-opacity-75">Añadir gasto</p>
+          <Link tabIndex={4} to='/add-movimiento' className="text-white rounded-full text-center py-0.5 px-3 bg-red-900 text-base hover:bg-opacity-75">
+            Añadir gasto
           </Link>
-          <Link to='/add-ingresos'>
-            <p className="text-white rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">Añadir ingreso</p>
+          <Link tabIndex={5} to='/add-ingresos' className="text-white rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">
+            Añadir ingreso
           </Link>
         </article>
 
         <article className="flex flex-col gap-1 items-center">
-          <p className="text-L-T-P-light dark:text-D-T-P-dark">Saldo de la cuenta:</p>
-          <h1 className="font-rubik text-L-D-P-dark dark:text-D-D-P-light text-5xl font-light">$ {user && user.saldo && format(user.saldo)}</h1>
+          <p tabIndex={6} className="text-L-T-P-light dark:text-D-T-P-dark">Saldo de la cuenta:</p>
+          <p tabIndex={7} className="font-rubik text-L-D-P-dark dark:text-D-D-P-light text-5xl font-light">$ {user && user.saldo && format(user.saldo)}</p>
         </article>
 
         <article className="w-full flex flex-col p-1 gap-3 bg-L-B-P dark:bg-D-B-S rounded border-2 border-solid border-L-D-P-dark dark:border-none">
-          {movimientos.length === 0 ? <h6 className="text-center">No hay movimientos :/</h6> : <h1 className="text-center">Movimientos</h1>}
+          {movimientos.length === 0 ? <p tabIndex={8} className="text-center text-xl">No hay movimientos :/</p> : <h1 className="text-center">Movimientos</h1>}
 
 
           <div className="flex flex-col-reverse gap-3">
-            {movimientos.map(movimiento => (
-              <MovimientoCard movimiento={movimiento} key={movimiento._id} />
+            {movimientos.map((movimiento, index) => (
+              <MovimientoCard movimiento={movimiento} key={movimiento._id} index={index} cantmovimientos={movimientos.length} />
             ))}
           </div>
         </article>

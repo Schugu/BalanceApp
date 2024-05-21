@@ -75,7 +75,7 @@ function ProfilePage() {
             <ChangeTheme />
           </section>
 
-          <section className="flex flex-col gap-3">
+          <section className="flex flex-col gap-3 items-center">
             <input
               type="file"
               style={{ display: 'none' }}
