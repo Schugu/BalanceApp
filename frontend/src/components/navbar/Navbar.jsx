@@ -15,19 +15,23 @@ function Navbar() {
       <div className="flex flex-wrap gap-2 justify-around items-center text-3xl">
         <Link to='/' className={` ${pathname === "/" ? 'text-L-D-P dark:text-L-D-P-light' : ''}
         hover:text-L-D-P dark:hover:text-L-D-P-light`}
+          tabIndex={1}
         >Home</Link>
 
         {isAuthenticated ? (
           <>
-            <Link to='/dashboard' className={` ${pathname === "/dashboard" ? 'text-L-D-P dark:text-L-D-P-light' : ''}
-        hover:text-L-D-P dark:hover:text-L-D-P-light`}>Dashboard</Link>
+            <Link to='/dashboard'
+              className={` ${pathname === "/dashboard" ? 'text-L-D-P dark:text-L-D-P-light' : ''}
+              hover:text-L-D-P dark:hover:text-L-D-P-light`}
+              tabIndex={2}
+            >Dashboard</Link>
 
             <section className='w-11 h-11 rounded-full overflow-hidden border-2 border-solid border-L-D-P'>
-              <Link to='/profile'>
+              <Link to='/profile' tabIndex={3} aria-label="Perfil">
                 <img
                   className="w-full h-auto object-cover object-center"
                   src=
-                  {
+                  {                         
                     user.profilePhoto && user.profilePhoto.urlImage
                       ? user.profilePhoto.urlImage
                       : "CarpinchoPlatudo.jpg"
@@ -39,7 +43,8 @@ function Navbar() {
           </>
         ) : (
           <>
-            <Link to='/login' className="rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">
+            <Link to='/login' tabIndex={3}
+            className="rounded-full text-center py-0.5 px-3 bg-L-D-P-dark text-base hover:bg-opacity-75">
               Ingresar
             </Link>
           </>
