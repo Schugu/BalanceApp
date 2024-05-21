@@ -68,7 +68,8 @@ function ProfilePage() {
 
         <div className="w-full flex flex-col items-center">
           <section className="w-full flex justify-between">
-            <button className="text-3xl border-2 border-solid border-transparent hover:border-L-D-P rounded-full px-2.5 py-1 hover:bg-L-D-P hover:bg-opacity-15" onClick={() => { navigate('/dashboard') }}>
+            <button tabIndex={1} aria-label="Atrás"
+              className="text-3xl border-2 border-solid border-transparent hover:border-L-D-P rounded-full px-2.5 py-1 hover:bg-L-D-P hover:bg-opacity-15" onClick={() => { navigate('/dashboard') }}>
               ⮌
             </button>
 
@@ -86,6 +87,8 @@ function ProfilePage() {
               onClick={handleProfileClick}
             >
               <img
+                tabIndex={3}
+                aria-label="Foto de perfil, Oprimir para cambiar"
                 className="w-full h-auto object-cover object-center"
                 src=
                 {
@@ -93,29 +96,29 @@ function ProfilePage() {
                     ? user.profilePhoto.urlImage
                     : "CarpinchoPlatudo.jpg"
                 }
-                alt="fotoDePerfil"
+                alt="foto de perfil"
               />
             </article>
-            <p className="text-3xl text-center border-b-2 border-solid border-L-D-P">{user.username}</p>
-          </section>
+            <p tabIndex={4} className="text-3xl text-center border-b-2 border-solid border-L-D-P">{user.username}</p>
+          </section>    
         </div>
 
-        <div className="w-full">
-          <h2 className="text-left text-xl">Datos</h2>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Nombre completo: <span className="text-L-D-P-dark dark:text-white">Luis Petri</span></h3>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Email: <span className="text-L-D-P-dark dark:text-white">{user.email}</span></h3>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Número: <span className="text-L-D-P-dark dark:text-white">+54 3794 30 000</span></h3>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Dirección: <span className="text-L-D-P-dark dark:text-white">Juan Bautista Alberdi 2024</span></h3>
+        <div className="w-full" tabIndex={5}>
+          <p className="text-left text-xl">Datos</p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Nombre completo: <span className="text-L-D-P-dark dark:text-white">Luis Petri</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Email: <span className="text-L-D-P-dark dark:text-white">{user.email}</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Número: <span className="text-L-D-P-dark dark:text-white">+54 3794 30 000</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Dirección: <span className="text-L-D-P-dark dark:text-white">Juan Bautista Alberdi 2024</span></p>
         </div>
 
-        <div className="w-full">
-          <h2 className="text-left text-xl">Balance</h2>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Saldo: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{user && user.saldo && format(user.saldo)}</span></h3>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Ingresos totales: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{ingresosTotales}</span></h3>
-          <h3 className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Gastos totales: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{egresosTotales}</span></h3>
+        <div className="w-full" tabIndex={6}>
+          <p className="text-left text-xl">Balance</p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Saldo: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{user && user.saldo && format(user.saldo)}</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Ingresos totales: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{ingresosTotales}</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Gastos totales: <span className="text-orange-600">$</span> <span className="text-L-D-P-dark dark:text-white">{egresosTotales}</span></p>
         </div>
 
-        <Link className="py-0.5 px-3 rounded text-center bg-red-500 text-L-T-S" to='/' onClick={() => { logout() }}>
+        <Link tabIndex={7} className="py-0.5 px-3 rounded text-center bg-red-500 text-L-T-S" to='/' onClick={() => { logout() }}>
           Cerrar Sesión
         </Link>
       </article>

@@ -14,11 +14,13 @@ export default function ChangeTheme() {
   };
 
   return (
-    <span
+    <div
+      tabIndex={2}
+      aria-label={`Cambiar de tema, tema actual: ${theme}`} 
       onClick={handleChangeTheme}
       className="cursor-pointer select-none text-3xl border-2 border-solid border-transparent hover:border-L-D-P rounded-full px-1 py-1.5 hover:bg-L-D-P hover:bg-opacity-15"
     >
-      {theme === 'light' ? '☀️' : '🌙'}
-    </span>
+      <span aria-hidden='true'>{theme === 'light' ? '☀️' : '🌙'}</span>
+    </div>
   );
 }
