@@ -83,7 +83,8 @@ function ProfilePage() {
               onChange={handleFileChange}
               ref={fileInputRef}
             />
-            <article className='w-40 h-40 rounded-full overflow-hidden border-4 border-solid border-L-D-P cursor-pointer'
+            <article
+              className='w-40 h-40 rounded-full overflow-hidden border-4 border-solid border-L-D-P cursor-pointer relative group'
               onClick={handleProfileClick}
             >
               <img
@@ -98,9 +99,27 @@ function ProfilePage() {
                 }
                 alt="foto de perfil"
               />
+              {/* Mostrar "+" al hacer hover  */}
+              <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 bg-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-gray-600 hover:text-gray-900 cursor-pointer"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                  />
+                </svg>
+              </div>
             </article>
+
             <p tabIndex={4} className="text-3xl text-center border-b-2 border-solid border-L-D-P">{user.username}</p>
-          </section>    
+          </section>
         </div>
 
         <div className="w-full" tabIndex={5}>
