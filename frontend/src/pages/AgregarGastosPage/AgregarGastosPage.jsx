@@ -1,7 +1,7 @@
+import React, { useRef, useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useBalance } from "../../context/BalanceContext.jsx";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import Navbar from "../../components/navbar/Navbar.jsx";
 import Modal from "../../components/Modal/Modal.jsx";
@@ -16,6 +16,8 @@ function MovimientosFormPage() {
   const [errores, setErrores] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [datosParaModal, setdatosParaModal] = useState([]);
+  const containerRef = useRef(null);
+  const [savedTabIndexes, setSavedTabIndexes] = useState([]);
 
   useEffect(() => {
     getProfile();
@@ -44,6 +46,7 @@ function MovimientosFormPage() {
       const saldoTotal = user.saldo;
       setdatosParaModal({ newBalance, dataValid, saldoTotal });
       setModalIsOpen(true);
+      disableTabIndexOutsideModal();
     }
   });
 
@@ -56,10 +59,30 @@ function MovimientosFormPage() {
       }
     }
     setModalIsOpen(false);
+    restoreTabIndexOutsideModal();
+  };
+
+  const disableTabIndexOutsideModal = () => {
+    if (containerRef.current) {
+      const elements = containerRef.current.querySelectorAll('[tabindex]');
+      const tabIndexes = [];
+      elements.forEach(element => {
+        tabIndexes.push({ element, tabIndex: element.getAttribute('tabindex') });
+        element.setAttribute('tabindex', '-1');
+      });
+      setSavedTabIndexes(tabIndexes);
+    }
+  };
+
+  const restoreTabIndexOutsideModal = () => {
+    savedTabIndexes.forEach(({ element, tabIndex }) => {
+      element.setAttribute('tabindex', tabIndex);
+    });
+    setSavedTabIndexes([]);
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P">
+    <div className="w-full min-h-screen flex flex-col items-center bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P" id="divDestabular" ref={containerRef}>
       <Navbar></Navbar>
 
       {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
@@ -88,7 +111,7 @@ function MovimientosFormPage() {
             />
             {
               errors.balance && (
-                <p tabIndex={6} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is requiere</p>
+                <p tabIndex={6} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is required</p>
               )
             }
             <p tabIndex={7} className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></p>
@@ -96,9 +119,9 @@ function MovimientosFormPage() {
 
 
           <article className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
-            <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el gasto.</label>
+            <label className="text-xl text-center" htmlFor="description">Ingrese un título para el gasto.</label>
             <textarea
-              aria-label="Ingrese un titulo para el gasto"
+              aria-label="Ingrese un título para el gasto"
               tabIndex={8}
               rows="3"
               placeholder="Ejemplo: Compra de bicicleta"
@@ -108,7 +131,7 @@ function MovimientosFormPage() {
             ></textarea>
             {
               errors.description && (
-                <p tabIndex={9} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is requiere</p>
+                <p tabIndex={9} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is required</p>
               )
             }
           </article>
@@ -122,7 +145,7 @@ function MovimientosFormPage() {
           className="w-full p-2 bg-red-500 rounded-lg hover:bg-opacity-70">Cancelar</button>
       </section>
     </div>
-  )
+  );
 }
 
 export default MovimientosFormPage;
