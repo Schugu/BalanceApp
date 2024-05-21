@@ -67,7 +67,7 @@ function MovimientosFormPage() {
       <section className="lg:w-3/6 w-full flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
           errores.map((error, i) => (
-            <article key={i} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">
+            <article tabIndex={4} key={i} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">
               {error}
             </article>
           ))
@@ -75,7 +75,10 @@ function MovimientosFormPage() {
         <form onSubmit={onSubmit} className="w-full flex flex-col items-center gap-6">
           <article className="w-full flex flex-col items-center gap-1.5">
             <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
-            <input type="number"
+            <input
+              tabIndex={5}
+              aria-label="Ingrese un monto"
+              type="number"
               step="0.01"
               name="balance"
               {...register('balance', { required: true })}
@@ -85,33 +88,36 @@ function MovimientosFormPage() {
             />
             {
               errors.balance && (
-                <p className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is requiere</p>
+                <p tabIndex={6} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is requiere</p>
               )
             }
-            <h2 className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></h2>
+            <p tabIndex={7} className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></p>
           </article>
 
 
           <article className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
             <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el gasto.</label>
             <textarea
+              aria-label="Ingrese un titulo para el gasto"
+              tabIndex={8}
               rows="3"
-              placeholder="Compra de bicicleta"
+              placeholder="Ejemplo: Compra de bicicleta"
               name="description"
               {...register('description', { required: true })}
               className="w-full p-4 bg-L-B-S rounded-lg placeholder:text-L-D-P focus:outline-none focus:ring-2 focus:ring-L-D-P text-white resize-none text-2xl"
             ></textarea>
             {
               errors.description && (
-                <p className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is requiere</p>
+                <p tabIndex={9} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is requiere</p>
               )
             }
           </article>
 
-          <button className="w-full p-2 bg-L-D-P rounded-lg hover:bg-opacity-75">Guardar</button>
+          <button tabIndex={10} className="w-full p-2 bg-L-D-P rounded-lg hover:bg-opacity-75">Guardar</button>
         </form>
 
         <button
+          tabIndex={11}
           onClick={() => { navigate('/dashboard') }}
           className="w-full p-2 bg-red-500 rounded-lg hover:bg-opacity-70">Cancelar</button>
       </section>
