@@ -111,7 +111,7 @@ function MovimientosFormPage() {
             />
             {
               errors.balance && (
-                <p tabIndex={6} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Balance is required</p>
+                <p tabIndex={6} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">El valor es requerido.</p>
               )
             }
             <p tabIndex={7} className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></p>
@@ -131,7 +131,7 @@ function MovimientosFormPage() {
             ></textarea>
             {
               errors.description && (
-                <p tabIndex={9} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is required</p>
+                <p tabIndex={9} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">La descripción es requerida.</p>
               )
             }
           </article>

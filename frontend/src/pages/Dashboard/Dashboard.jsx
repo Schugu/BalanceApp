@@ -36,7 +36,7 @@ function Dashboard() {
         </article>
 
         <article className="w-full flex flex-col p-1 gap-3 bg-L-B-P dark:bg-D-B-S rounded border-2 border-solid border-L-D-P-dark dark:border-none">
-          {movimientos.length === 0 ? <p tabIndex={8} className="text-center text-xl">No hay movimientos :/</p> : <h1 className="text-center">Movimientos</h1>}
+          {movimientos.length === 0 ? <p tabIndex={8} className="text-center text-xl">No hay movimientos :/</p> : <p tabIndex={8} className="text-center text-xl">Movimientos</p>}
 
 
           <div className="flex flex-col-reverse gap-3">
