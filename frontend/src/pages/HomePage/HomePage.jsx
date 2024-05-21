@@ -3,10 +3,10 @@ import parrafos from "./parrafos.js";
 
 function HomePage() {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Navbar></Navbar>
 
-      <section className="w-full min-h-screen flex flex-wrap gap-5 p-5 justify-center bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P">
+      <section className="w-full min-h-screen flex flex-wrap gap-5 p-2.5 justify-center bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P">
 
         {parrafos.map((parrafo, index) => (
           <article className="flex flex-col gap-2.5 s:max-w-lg" key={index}>
@@ -17,7 +17,6 @@ function HomePage() {
           </article>
         ))}
       </section>
-
     </div>
   )
 }
