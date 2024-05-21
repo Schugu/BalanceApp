@@ -108,12 +108,12 @@ function MovimientosFormPage() {
             }
           </article>
 
-          <button className="w-full p-2 bg-L-D-P rounded-lg">Guardar</button>
+          <button className="w-full p-2 bg-L-D-P rounded-lg hover:bg-opacity-75">Guardar</button>
         </form>
 
         <button
           onClick={() => { navigate('/dashboard') }}
-          className="w-full p-2 bg-red-500 rounded-lg">Cancelar</button>
+          className="w-full p-2 bg-red-500 rounded-lg hover:bg-opacity-70">Cancelar</button>
       </section>
     </div>
   )

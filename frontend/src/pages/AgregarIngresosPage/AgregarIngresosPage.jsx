@@ -59,21 +59,21 @@ function AgregarIngresosPage() {
   };
 
   return (
-    <>
+    <div className="w-full min-h-screen flex flex-col items-center bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-T-P">
       <Navbar></Navbar>
 
       {modalIsOpen && <Modal setModalIsOpen={setModalIsOpen} datosParaModal={datosParaModal} handleConfirmation={handleConfirmation} />}
 
-      <div className="w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
+      <section className="lg:w-3/6 w-full min-h-screen flex flex-col items-center gap-2.5 p-2.5 bg-L-B-P dark:bg-D-B-P dark:text-D-T-P">
         {
           errores.map((error, i) => (
-            <div key={i} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">
+            <article key={i} className="bg-red-100 text-red-600 w-full text-center p-1 rounded">
               {error}
-            </div>
+            </article>
           ))
         }
         <form onSubmit={onSubmit} className="w-full flex flex-col items-center gap-6">
-          <section className="w-full flex flex-col items-center gap-1.5">
+          <article className="w-full flex flex-col items-center gap-1.5">
             <label className="text-2xl text-center" htmlFor="number">Ingrese un monto.</label>
             <input type="number"
               step="0.01"
@@ -89,9 +89,9 @@ function AgregarIngresosPage() {
               )
             }
             <h2 className="text-lg text-center">Saldo disponible: <span className="text-L-D-P-dark">$ </span><span className="font-rubik">{user && user.saldo && format(user.saldo)}</span></h2>
-          </section>
+          </article>
 
-          <section className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
+          <article className="w-full flex flex-col items-center gap-1.5 pt-2 border-t-2 border-solid border-L-D-P">
             <label className="text-xl text-center" htmlFor="description">Ingrese un titulo para el Ingreso.</label>
             <textarea
               rows="3"
@@ -105,15 +105,15 @@ function AgregarIngresosPage() {
                 <p className="bg-red-100 text-red-600 w-full text-center p-1 rounded">Description is requiere</p>
               )
             }
-          </section>
+          </article>
 
-          <button className="w-full p-2 bg-L-D-P rounded-lg">Guardar</button>
+          <button className="w-full p-2 bg-L-D-P rounded-lg hover:bg-opacity-75">Guardar</button>
         </form>
         <button
           onClick={() => { navigate('/dashboard') }}
-          className="w-full p-2 bg-red-500 rounded-lg">Cancelar</button>
-      </div>
-    </>
+          className="w-full p-2 bg-red-500 rounded-lg hover:bg-opacity-70">Cancelar</button>
+      </section>
+    </div>
   )
 }
 export default AgregarIngresosPage;
