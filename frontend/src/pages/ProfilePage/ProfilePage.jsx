@@ -64,7 +64,7 @@ function ProfilePage() {
 
   return (
     <section className="min-h-screen w-full flex justify-center items-center p-2 bg-L-B-P text-L-T-P dark:bg-D-B-P dark:text-D-D-P-light">
-      <article className="flex flex-col justify-center items-center gap-5 w-full rounded-md p-2.5 dark:bg-D-B-P-light">
+      <article className="lg:w-3/6 flex flex-col justify-center items-center gap-5 w-full rounded-md p-2.5 dark:bg-D-B-P-light">
 
         <div className="w-full flex flex-col items-center">
           <section className="w-full flex justify-between">
