@@ -1,6 +1,6 @@
 <h1 align='center'>🌟 BalanceApp💰🌟</h1>
 
-> Práctica de HTML, CSS, JavaScript, React, Node.js, Express, MongoDB y Firebase. ✨
+> Práctica de HTML, CSS, JavaScript, React, TailwindCSS, Node.js, Express, MongoDB y Firebase. ✨
 
 🎯 Objetivo: Desarrollar una aplicación tipo Wallet virtual.
 
