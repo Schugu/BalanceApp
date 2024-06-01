@@ -55,7 +55,7 @@ Sigue estos pasos para ejecutar el front end del proyecto localmente:
 
 1. Abre otra consola o terminal en la ubicación del proyecto clonado.
 
-2. Navega al directorio del back end:
+2. Navega al directorio del front end:
 
     ```bash
     cd frontend
