@@ -1,6 +1,6 @@
 <h1 align='center'>🌟 BalanceApp💰🌟</h1>
 
-> Práctica de HTML, CSS, JavaScript, React, Node.js, Express, MongoDB y Firebase. ✨
+> Práctica de HTML, CSS, JavaScript, React, TailwindCSS, Node.js, Express, MongoDB y Firebase. ✨
 
 🎯 Objetivo: Desarrollar una aplicación tipo Wallet virtual.
 
@@ -55,7 +55,7 @@ Sigue estos pasos para ejecutar el front end del proyecto localmente:
 
 1. Abre otra consola o terminal en la ubicación del proyecto clonado.
 
-2. Navega al directorio del back end:
+2. Navega al directorio del front end:
 
     ```bash
     cd frontend
