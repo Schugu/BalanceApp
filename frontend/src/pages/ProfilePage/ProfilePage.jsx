@@ -124,7 +124,7 @@ function ProfilePage() {
 
         <div className="w-full" tabIndex={5}>
           <p className="text-left text-xl">Datos</p>
-          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Nombre completo: <span className="text-L-D-P-dark dark:text-white">Luis Petri</span></p>
+          <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Nombre completo: <span className="text-L-D-P-dark dark:text-white">Leandro Schugu</span></p>
           <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Email: <span className="text-L-D-P-dark dark:text-white">{user.email}</span></p>
           <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Número: <span className="text-L-D-P-dark dark:text-white">+54 3794 30 000</span></p>
           <p className="text-left p-1.5 border-t border-dashed border-black dark:border-white">Dirección: <span className="text-L-D-P-dark dark:text-white">Juan Bautista Alberdi 2024</span></p>
