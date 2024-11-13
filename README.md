@@ -86,4 +86,10 @@ Para personalizar y comprender el proyecto, sigue estas instrucciones:
 - **Front end**: Si deseas modificar o entender cómo funciona el front end, te recomiendo revisar los archivos y carpetas dentro de `src`. La lógica de la aplicación se encuentra principalmente en los archivos `App.jsx` y `Main.jsx`, mientras que los componentes individuales se encuentran en la carpeta `src/components`.
 
 ### Capturas de pantalla 📸
-<img src='public/CapturaDePantalla1.png' alt='CapturaDePantalla1'>
+<img src='screenshots/1.png' alt='CapturaDePantalla1'>
+<img src='screenshots/2.png' alt='CapturaDePantalla2'>
+<img src='screenshots/3.png' alt='CapturaDePantalla3'>
+<img src='screenshots/4.png' alt='CapturaDePantalla4'>
+<img src='screenshots/5.png' alt='CapturaDePantalla5'>
+<img src='screenshots/6.png' alt='CapturaDePantalla6'>
+<img src='screenshots/7.png' alt='CapturaDePantalla7'>
